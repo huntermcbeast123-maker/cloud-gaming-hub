@@ -11,10 +11,40 @@
             box-sizing: border-box;
         }
 
+        /* Themes */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body.dark {
             background: #0a0a0f;
             color: white;
+        }
+
+        body.light {
+            background: #f0f0f0;
+            color: #1a1a2a;
+        }
+
+        body.dark .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 10%, #1a1a3e, #0a0a0f 80%);
+            z-index: -2;
+        }
+
+        body.light .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 10%, #d0d0e0, #f0f0f0 80%);
+            z-index: -2;
         }
 
         /* Header */
@@ -24,13 +54,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
             border-bottom: 1px solid #333;
+        }
+
+        body.light .header {
+            background: rgba(255,255,255,0.9);
+            border-bottom: 1px solid #ddd;
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
             color: #6c5ce7;
+        }
+
+        .theme-toggle {
+            background: #6c5ce7;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
         }
 
         .user-info {
@@ -54,7 +100,7 @@
 
         /* Main Container */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -67,7 +113,7 @@
 
         .hero h1 {
             font-size: 48px;
-            background: linear-gradient(135deg, #fff, #6c5ce7);
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -77,11 +123,60 @@
             margin-top: 10px;
         }
 
+        /* Search and Filters */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 1px solid #333;
+            background: #1a1a2a;
+            color: white;
+            font-size: 16px;
+        }
+
+        body.light .search-box {
+            background: white;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .category-filter {
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 1px solid #333;
+            background: #1a1a2a;
+            color: white;
+            cursor: pointer;
+        }
+
+        body.light .category-filter {
+            background: white;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .favorites-toggle {
+            background: #6c5ce7;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
         /* Section Titles */
         .section-title {
             font-size: 24px;
             margin: 30px 0 20px;
-            color: #fff;
         }
 
         /* Cloud Gaming Cards */
@@ -99,6 +194,11 @@
             text-align: center;
             border: 1px solid #333;
             transition: 0.3s;
+        }
+
+        body.light .cloud-card {
+            background: white;
+            border: 1px solid #ddd;
         }
 
         .cloud-card:hover {
@@ -134,10 +234,6 @@
             font-size: 14px;
         }
 
-        .cloud-btn:hover {
-            background: #5b4bc4;
-        }
-
         /* Games Grid */
         .games-grid {
             display: grid;
@@ -153,11 +249,31 @@
             text-align: center;
             border: 1px solid #333;
             transition: 0.3s;
+            position: relative;
+        }
+
+        body.light .game-card {
+            background: white;
+            border: 1px solid #ddd;
         }
 
         .game-card:hover {
             transform: translateY(-5px);
             border-color: #6c5ce7;
+        }
+
+        .favorite-star {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .favorite-star:hover {
+            transform: scale(1.1);
         }
 
         .game-icon {
@@ -197,12 +313,21 @@
             margin: 30px 0;
         }
 
+        body.light .updates-section {
+            background: white;
+            border: 1px solid #ddd;
+        }
+
         .update-item {
             display: flex;
             align-items: center;
             gap: 15px;
             padding: 12px 0;
             border-bottom: 1px solid #333;
+        }
+
+        body.light .update-item {
+            border-bottom: 1px solid #eee;
         }
 
         .update-badge {
@@ -218,7 +343,6 @@
 
         .update-text {
             flex: 1;
-            color: #ddd;
         }
 
         .update-date {
@@ -325,10 +449,12 @@
             .container { padding: 10px; }
             .hero h1 { font-size: 32px; }
             .header { padding: 10px 20px; }
+            .controls { flex-direction: column; align-items: center; }
+            .search-box { max-width: 100%; }
         }
     </style>
 </head>
-<body>
+<body class="dark">
 
 <!-- SIGN IN / SIGN UP SCREEN -->
 <div id="authScreen" class="auth-overlay">
@@ -363,10 +489,13 @@
 <div id="mainApp" class="main-app">
     <div class="header">
         <div class="logo">⚡ NEXUSPLAY</div>
-        <div class="user-info">
-            <span class="avatar" id="userAvatar">😎</span>
-            <span id="userName">Gamer</span>
-            <button class="logout-btn" onclick="logout()">Sign Out</button>
+        <div style="display: flex; gap: 10px;">
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Dark/Light</button>
+            <div class="user-info">
+                <span class="avatar" id="userAvatar">😎</span>
+                <span id="userName">Gamer</span>
+                <button class="logout-btn" onclick="logout()">Sign Out</button>
+            </div>
         </div>
     </div>
 
@@ -380,13 +509,29 @@
         <div class="section-title">☁️ Cloud Gaming Services</div>
         <div class="cloud-grid" id="cloudGrid"></div>
 
+        <!-- Search and Filters -->
+        <div class="controls">
+            <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search games..." onkeyup="filterGames()">
+            <select class="category-filter" id="categoryFilter" onchange="filterGames()">
+                <option value="all">All Categories</option>
+                <option value="Battle Royale">Battle Royale</option>
+                <option value="Shooter">Shooter</option>
+                <option value="Action">Action</option>
+                <option value="Sandbox">Sandbox</option>
+                <option value="Indie">Indie</option>
+                <option value="Sports">Sports</option>
+                <option value="Party">Party</option>
+            </select>
+            <button class="favorites-toggle" onclick="toggleFavoritesView()">⭐ Show Favorites</button>
+        </div>
+
         <!-- News Updates -->
         <div class="updates-section">
             <div class="section-title" style="margin: 0 0 15px 0;">📢 Latest News</div>
             <div id="updatesList"></div>
         </div>
 
-        <!-- Popular Games -->
+        <!-- Games Grid -->
         <div class="section-title">🎮 Popular Games</div>
         <div class="games-grid" id="gamesGrid"></div>
 
@@ -405,27 +550,109 @@
         { name: "Boosteroid", icon: "🚀", description: "4K Cloud Gaming", url: "https://boosteroid.com" }
     ];
 
-    // ========== GAMES ==========
-    const games = [
+    // ========== GAMES (MORE GAMES ADDED) ==========
+    const allGames = [
         { name: "Fortnite", icon: "🔫", category: "Battle Royale", url: "https://www.fortnite.com/play" },
         { name: "Call of Duty", icon: "🎯", category: "Shooter", url: "https://www.callofduty.com/warzone" },
         { name: "GTA V", icon: "🚗", category: "Action", url: "https://www.rockstargames.com/gta-v" },
         { name: "Minecraft", icon: "⛏️", category: "Sandbox", url: "https://www.minecraft.net" },
-        { name: "Valorant", icon: "🎯", category: "Tactical Shooter", url: "https://playvalorant.com" },
+        { name: "Valorant", icon: "🎯", category: "Shooter", url: "https://playvalorant.com" },
         { name: "Apex Legends", icon: "🏆", category: "Battle Royale", url: "https://www.ea.com/games/apex-legends" },
         { name: "Rocket League", icon: "🚀", category: "Sports", url: "https://www.rocketleague.com" },
-        { name: "We Become What We Behold", icon: "📸", category: "Indie", url: "https://ncase.itch.io/wbwwb" }
+        { name: "We Become What We Behold", icon: "📸", category: "Indie", url: "https://ncase.itch.io/wbwwb" },
+        { name: "PUBG", icon: "🔫", category: "Battle Royale", url: "https://pubg.com" },
+        { name: "Overwatch 2", icon: "🎯", category: "Shooter", url: "https://overwatch.blizzard.com" },
+        { name: "League of Legends", icon: "⚔️", category: "MOBA", url: "https://leagueoflegends.com" },
+        { name: "Roblox", icon: "🧸", category: "Sandbox", url: "https://roblox.com" },
+        { name: "Fall Guys", icon: "🫘", category: "Party", url: "https://fallguys.com" },
+        { name: "Among Us", icon: "👾", category: "Party", url: "https://innersloth.com/games/among-us" },
+        { name: "CS:GO", icon: "🔫", category: "Shooter", url: "https://counter-strike.net" },
+        { name: "Destiny 2", icon: "🌌", category: "Shooter", url: "https://bungie.net/destiny" },
+        { name: "Rainbow Six Siege", icon: "🎯", category: "Shooter", url: "https://rainbow6.ubisoft.com" },
+        { name: "Dead by Daylight", icon: "🔪", category: "Horror", url: "https://deadbydaylight.com" },
+        { name: "Genshin Impact", icon: "🗡️", category: "RPG", url: "https://genshin.hoyoverse.com" },
+        { name: "Halo Infinite", icon: "🪖", category: "Shooter", url: "https://halowaypoint.com" }
     ];
 
     // ========== UPDATES ==========
     const updates = [
+        { text: "20+ games now available on NexusPlay!", date: "April 17, 2026", type: "new" },
         { text: "GeForce NOW added to cloud services!", date: "April 17, 2026", type: "new" },
         { text: "Xbox Cloud Gaming is now available!", date: "April 16, 2026", type: "new" },
+        { text: "Search and filter features added!", date: "April 16, 2026", type: "feature" },
         { text: "Fortnite Chapter 5 Season 3 is live!", date: "April 15, 2026", type: "update" },
         { text: "GTA 6 confirmed for 2025 release", date: "April 14, 2026", type: "news" }
     ];
 
     let selectedAvatar = "😎";
+    let favorites = JSON.parse(localStorage.getItem('nexusplay_favorites') || '[]');
+    let showFavoritesOnly = false;
+
+    // ========== THEME FUNCTIONS ==========
+    function toggleTheme() {
+        if (document.body.classList.contains('dark')) {
+            document.body.classList.remove('dark');
+            document.body.classList.add('light');
+            localStorage.setItem('nexusplay_theme', 'light');
+        } else {
+            document.body.classList.remove('light');
+            document.body.classList.add('dark');
+            localStorage.setItem('nexusplay_theme', 'dark');
+        }
+    }
+
+    function loadTheme() {
+        const savedTheme = localStorage.getItem('nexusplay_theme');
+        if (savedTheme === 'light') {
+            document.body.classList.remove('dark');
+            document.body.classList.add('light');
+        } else {
+            document.body.classList.remove('light');
+            document.body.classList.add('dark');
+        }
+    }
+
+    // ========== FAVORITE FUNCTIONS ==========
+    function toggleFavorite(gameName) {
+        if (favorites.includes(gameName)) {
+            favorites = favorites.filter(f => f !== gameName);
+        } else {
+            favorites.push(gameName);
+        }
+        localStorage.setItem('nexusplay_favorites', JSON.stringify(favorites));
+        filterGames();
+    }
+
+    function toggleFavoritesView() {
+        showFavoritesOnly = !showFavoritesOnly;
+        const btn = document.querySelector('.favorites-toggle');
+        if (btn) {
+            btn.textContent = showFavoritesOnly ? '⭐ Show All Games' : '⭐ Show Favorites';
+        }
+        filterGames();
+    }
+
+    // ========== FILTER FUNCTIONS ==========
+    function filterGames() {
+        const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+        const category = document.getElementById('categoryFilter').value;
+        
+        let filtered = allGames;
+        
+        if (showFavoritesOnly) {
+            filtered = filtered.filter(game => favorites.includes(game.name));
+        }
+        
+        if (searchTerm) {
+            filtered = filtered.filter(game => game.name.toLowerCase().includes(searchTerm));
+        }
+        
+        if (category !== 'all') {
+            filtered = filtered.filter(game => game.category === category);
+        }
+        
+        renderGames(filtered);
+    }
 
     // ========== RENDER FUNCTIONS ==========
     function renderCloudServices() {
@@ -444,13 +671,15 @@
         });
     }
 
-    function renderGames() {
+    function renderGames(gamesToRender) {
         const container = document.getElementById('gamesGrid');
         if (!container) return;
         container.innerHTML = '';
-        games.forEach(game => {
+        gamesToRender.forEach(game => {
+            const isFavorite = favorites.includes(game.name);
             container.innerHTML += `
                 <div class="game-card">
+                    <button class="favorite-star" onclick="toggleFavorite('${game.name}')">${isFavorite ? '⭐' : '☆'}</button>
                     <div class="game-icon">${game.icon}</div>
                     <h3>${game.name}</h3>
                     <span class="game-category">${game.category}</span>
@@ -458,6 +687,10 @@
                 </div>
             `;
         });
+        
+        if (gamesToRender.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#888; grid-column:1/-1;">No games found. Try a different search!</p>';
+        }
     }
 
     function renderUpdates() {
@@ -468,6 +701,7 @@
             let badgeClass = '';
             if (update.type === 'new') badgeClass = 'badge-new';
             else if (update.type === 'update') badgeClass = 'badge-update';
+            else if (update.type === 'feature') badgeClass = 'badge-new';
             else badgeClass = 'badge-news';
             
             container.innerHTML += `
@@ -544,8 +778,9 @@
         document.getElementById('userName').innerText = username;
         document.getElementById('userAvatar').innerText = avatar;
         renderCloudServices();
-        renderGames();
+        renderGames(allGames);
         renderUpdates();
+        loadTheme();
     }
 
     function showSignup() {
