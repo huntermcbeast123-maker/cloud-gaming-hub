@@ -293,3 +293,519 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NexusPlay - Cloud Gaming Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Animated Background */
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #0a0f2a, #1a1f3a, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            to { transform: translateY(-100vh) rotate(360deg); opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Auth Container */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .auth-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-box h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1a1f3a;
+        }
+
+        .auth-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+
+        .auth-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .switch-auth {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .switch-auth a {
+            color: #667eea;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Main Game Section */
+        .main-section {
+            display: none;
+        }
+
+        /* Header with user profile */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .user-info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            background: #ff4757;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #ff6b81;
+        }
+
+        /* Updates Section */
+        .updates-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .updates-title {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .update-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .update-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .update-text {
+            color: #333;
+            flex: 1;
+        }
+
+        .update-date {
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* Game Grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .game-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        .game-card h3 {
+            color: #1a1f3a;
+            margin-bottom: 10px;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 48px;
+            margin: 20px 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<div class="container">
+    <!-- Auth Section -->
+    <div id="authSection" class="auth-container">
+        <div class="auth-box" id="loginBox">
+            <h2>🎮 Welcome to NexusPlay</h2>
+            <p>Sign in to start your gaming journey</p>
+            <input type="text" id="loginUsername" class="auth-input" placeholder="Username">
+            <button class="auth-btn" onclick="login()">Sign In →</button>
+            <div class="switch-auth">
+                <a onclick="showSignup()">Don't have an account? Create one →</a>
+            </div>
+        </div>
+
+        <div class="auth-box" id="signupBox" style="display: none;">
+            <h2>✨ Create Account</h2>
+            <p>No email needed. Just pick a username!</p>
+            <input type="text" id="signupUsername" class="auth-input" placeholder="Choose a username">
+            <button class="auth-btn" onclick="signup()">Create Account →</button>
+            <div class="switch-auth">
+                <a onclick="showLogin()">Already have an account? Sign in →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Game Section -->
+    <div id="mainSection" class="main-section">
+        <div class="header">
+            <div class="logo">🎮 Nexus<span>Play</span></div>
+            <div class="user-info">
+                👤 <span id="currentUser">Gamer</span>
+                <button class="logout-btn" onclick="logout()">Sign Out</button>
+            </div>
+        </div>
+
+        <h1>🚀 Cloud Gaming Hub</h1>
+        <div class="subtitle">Play instantly. No downloads. No limits.</div>
+
+        <!-- Updates Section -->
+        <div class="updates-section">
+            <div class="updates-title">
+                📢 What's New
+                <span style="font-size: 14px; background: #ff4757; padding: 2px 10px; border-radius: 20px;">Live</span>
+            </div>
+            <div id="updatesList"></div>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="game-grid" id="gameGrid"></div>
+    </div>
+</div>
+
+<script>
+    // Games database
+    const games = [
+        { name: "2048", icon: "🧩", url: "https://play2048.co/", category: "Puzzle" },
+        { name: "Slope", icon: "🏔️", url: "https://slope-game.io/", category: "Arcade" },
+        { name: "GeForce NOW", icon: "☁️", url: "https://play.geforcenow.com/", category: "Cloud" },
+        { name: "Xbox Cloud", icon: "🎮", url: "https://www.xbox.com/play", category: "Cloud" },
+        { name: "Tetris", icon: "🔲", url: "https://tetris.com/play-tetris", category: "Puzzle" },
+        { name: "Fireboy & Watergirl", icon: "🔥", url: "https://coolmathgames.com/0-fireboy-and-watergirl", category: "Adventure" }
+    ];
+
+    // Updates database (you can add more!)
+    const updates = [
+        { text: "🔥 Added 2 new games to the library!", date: "April 16, 2026", badge: "NEW" },
+        { text: "✨ Create accounts with any username - no email needed!", date: "April 15, 2026", badge: "FEATURE" },
+        { text: "🎨 Animated background and smoother UI", date: "April 14, 2026", badge: "UPDATE" },
+        { text: "🚀 Cloud Gaming Hub launched!", date: "April 13, 2026", badge: "LAUNCH" }
+    ];
+
+    // Load games
+    function loadGames() {
+        const grid = document.getElementById('gameGrid');
+        grid.innerHTML = '';
+        games.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                <div class="game-icon">${game.icon}</div>
+                <h3>${game.name}</h3>
+                <small style="color: #999;">${game.category}</small>
+                <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // Load updates
+    function loadUpdates() {
+        const updatesDiv = document.getElementById('updatesList');
+        updatesDiv.innerHTML = '';
+        updates.forEach(update => {
+            const item = document.createElement('div');
+            item.className = 'update-item';
+            item.innerHTML = `
+                <div class="update-badge" style="background: ${update.badge === 'NEW' ? '#ff4757' : '#667eea'}">${update.badge}</div>
+                <div class="update-text">${update.text}</div>
+                <div class="update-date">${update.date}</div>
+            `;
+            updatesDiv.appendChild(item);
+        });
+    }
+
+    // Account functions
+    function signup() {
+        const username = document.getElementById('signupUsername').value.trim();
+        if (username === "") {
+            alert("Please enter a username!");
+            return;
+        }
+        
+        // Check if username exists
+        let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
+        if (users[username]) {
+            alert("Username already taken! Try another one.");
+            return;
+        }
+        
+        // Create account
+        users[username] = { created: new Date().toISOString() };
+        localStorage.setItem("nexusplay_users", JSON.stringify(users));
+        localStorage.setItem("nexusplay_current", username);
+        
+        showMainSection(username);
+    }
+
+    function login() {
+        const username = document.getElementById('loginUsername').value.trim();
+        if (username === "") {
+            alert("Please enter your username!");
+            return;
+        }
+        
+        let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
+        if (!users[username]) {
+            alert("Username not found! Create an account first.");
+            return;
+        }
+        
+        localStorage.setItem("nexusplay_current", username);
+        showMainSection(username);
+    }
+
+    function logout() {
+        localStorage.removeItem("nexusplay_current");
+        document.getElementById('mainSection').style.display = 'none';
+        document.getElementById('authSection').style.display = 'flex';
+        document.getElementById('loginUsername').value = '';
+        document.getElementById('signupUsername').value = '';
+    }
+
+    function showMainSection(username) {
+        document.getElementById('authSection').style.display = 'none';
+        document.getElementById('mainSection').style.display = 'block';
+        document.getElementById('currentUser').innerText = username;
+        loadGames();
+        loadUpdates();
+    }
+
+    function showSignup() {
+        document.getElementById('loginBox').style.display = 'none';
+        document.getElementById('signupBox').style.display = 'block';
+    }
+
+    function showLogin() {
+        document.getElementById('signupBox').style.display = 'none';
+        document.getElementById('loginBox').style.display = 'block';
+    }
+
+    // Check if user is already logged in
+    function checkLogin() {
+        const current = localStorage.getItem("nexusplay_current");
+        if (current) {
+            let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
+            if (users[current]) {
+                showMainSection(current);
+                return;
+            }
+        }
+        document.getElementById('authSection').style.display = 'flex';
+        document.getElementById('mainSection').style.display = 'none';
+    }
+
+    // Create floating particles
+    function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 5 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = Math.random() * 20 + 10 + 's';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            container.appendChild(particle);
+        }
+    }
+
+    // Initialize
+    createParticles();
+    checkLogin();
+</script>
+
+</body>
+</html>
