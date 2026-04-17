@@ -18,7 +18,6 @@
             overflow-x: hidden;
         }
 
-        /* Dark Theme Background - Epic Games Style */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -29,7 +28,6 @@
             z-index: -2;
         }
 
-        /* Navigation Bar */
         .navbar {
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
@@ -49,7 +47,6 @@
             background: linear-gradient(135deg, #ffffff, #6c5ce7, #a29bfe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
         }
 
         .nav-links {
@@ -62,7 +59,6 @@
             color: #ccc;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
             font-size: 14px;
         }
 
@@ -77,12 +73,6 @@
             background: rgba(255,255,255,0.08);
             padding: 6px 18px;
             border-radius: 40px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .user-menu:hover {
-            background: rgba(255,255,255,0.15);
         }
 
         .user-avatar {
@@ -95,17 +85,14 @@
             color: #ff6b6b;
             cursor: pointer;
             font-size: 13px;
-            margin-left: 8px;
         }
 
-        /* Main Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 40px;
         }
 
-        /* Hero Section */
         .hero {
             margin: 50px 0 30px 0;
         }
@@ -124,7 +111,6 @@
             font-size: 18px;
         }
 
-        /* Featured Carousel */
         .featured-section {
             margin: 40px 0;
         }
@@ -139,14 +125,12 @@
         .section-header h2 {
             font-size: 24px;
             font-weight: 700;
-            letter-spacing: -0.3px;
         }
 
         .carousel {
             display: flex;
             gap: 20px;
             overflow-x: auto;
-            scroll-behavior: smooth;
             padding: 10px 0 20px 0;
         }
 
@@ -170,13 +154,11 @@
             border-radius: 16px;
             overflow: hidden;
             transition: all 0.3s;
-            cursor: pointer;
             border: 1px solid rgba(255,255,255,0.05);
         }
 
         .featured-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
             border-color: rgba(108,92,231,0.4);
         }
 
@@ -217,7 +199,6 @@
             color: white;
             cursor: pointer;
             font-size: 13px;
-            transition: all 0.2s;
         }
 
         .btn-trailer:hover {
@@ -233,17 +214,14 @@
             cursor: pointer;
             font-size: 13px;
             font-weight: 600;
-            transition: all 0.2s;
             text-decoration: none;
             display: inline-block;
         }
 
         .btn-play:hover {
             background: #5b4bc4;
-            transform: scale(1.02);
         }
 
-        /* Updates Section */
         .updates-section {
             background: rgba(30,30,46,0.6);
             backdrop-filter: blur(10px);
@@ -251,10 +229,6 @@
             padding: 25px;
             margin: 40px 0;
             border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .updates-list {
-            margin-top: 15px;
         }
 
         .update-item {
@@ -275,20 +249,15 @@
         .badge-new { background: #ff4757; }
         .badge-update { background: #6c5ce7; }
         .badge-news { background: #ffa502; }
-        .badge-feature { background: #2ed573; }
 
         .update-text { color: #ddd; flex: 1; font-size: 14px; }
         .update-date { color: #666; font-size: 12px; }
-
-        /* Games Grid */
-        .games-section {
-            margin: 50px 0;
-        }
 
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 25px;
+            margin: 30px 0;
         }
 
         .game-card {
@@ -298,13 +267,11 @@
             text-align: center;
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer;
         }
 
         .game-card:hover {
             transform: translateY(-5px);
             border-color: #6c5ce7;
-            box-shadow: 0 10px 25px rgba(108,92,231,0.2);
         }
 
         .game-icon {
@@ -350,7 +317,6 @@
             font-size: 11px;
             text-decoration: none;
             display: inline-block;
-            font-weight: 600;
         }
 
         /* Auth Modal */
@@ -379,7 +345,6 @@
         .auth-modal h2 {
             text-align: center;
             margin-bottom: 8px;
-            font-size: 28px;
         }
 
         .auth-modal p {
@@ -399,11 +364,6 @@
             font-size: 16px;
         }
 
-        .auth-modal input:focus {
-            outline: none;
-            border-color: #6c5ce7;
-        }
-
         .avatar-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -417,7 +377,6 @@
             background: #252540;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s;
             border: 2px solid transparent;
         }
 
@@ -450,7 +409,6 @@
             cursor: pointer;
         }
 
-        /* Trailer Modal */
         .trailer-modal {
             display: none;
             position: fixed;
@@ -482,7 +440,6 @@
             float: right;
             font-size: 28px;
             cursor: pointer;
-            margin-bottom: 10px;
             color: white;
         }
 
@@ -520,14 +477,14 @@
             <p>Choose a username and your avatar</p>
             <input type="text" id="signupUsername" placeholder="Username">
             <div class="avatar-grid" id="avatarGrid">
-                <div class="avatar-option" data-avatar="😎"><div class="avatar-emoji">😎</div><div style="font-size:10px">Cool</div></div>
-                <div class="avatar-option" data-avatar="🦸"><div class="avatar-emoji">🦸</div><div style="font-size:10px">Hero</div></div>
-                <div class="avatar-option" data-avatar="🐱"><div class="avatar-emoji">🐱</div><div style="font-size:10px">Cat</div></div>
-                <div class="avatar-option" data-avatar="🤖"><div class="avatar-emoji">🤖</div><div style="font-size:10px">Robot</div></div>
-                <div class="avatar-option" data-avatar="👑"><div class="avatar-emoji">👑</div><div style="font-size:10px">King</div></div>
-                <div class="avatar-option" data-avatar="🧙"><div class="avatar-emoji">🧙</div><div style="font-size:10px">Wizard</div></div>
-                <div class="avatar-option" data-avatar="👾"><div class="avatar-emoji">👾</div><div style="font-size:10px">Alien</div></div>
-                <div class="avatar-option" data-avatar="🔥"><div class="avatar-emoji">🔥</div><div style="font-size:10px">Fire</div></div>
+                <div class="avatar-option" data-avatar="😎"><div class="avatar-emoji">😎</div></div>
+                <div class="avatar-option" data-avatar="🦸"><div class="avatar-emoji">🦸</div></div>
+                <div class="avatar-option" data-avatar="🐱"><div class="avatar-emoji">🐱</div></div>
+                <div class="avatar-option" data-avatar="🤖"><div class="avatar-emoji">🤖</div></div>
+                <div class="avatar-option" data-avatar="👑"><div class="avatar-emoji">👑</div></div>
+                <div class="avatar-option" data-avatar="🧙"><div class="avatar-emoji">🧙</div></div>
+                <div class="avatar-option" data-avatar="👾"><div class="avatar-emoji">👾</div></div>
+                <div class="avatar-option" data-avatar="🔥"><div class="avatar-emoji">🔥</div></div>
             </div>
             <button class="auth-btn" onclick="signupWithAvatar()">Create Account</button>
             <div class="switch-link" onclick="showLoginModal()">← Back to Sign In</div>
@@ -557,7 +514,6 @@
             <p>Watch trailers • Play instantly • Stay updated with the latest gaming news</p>
         </div>
 
-        <!-- Featured Carousel -->
         <div class="featured-section">
             <div class="section-header">
                 <h2>⭐ Featured Games</h2>
@@ -565,21 +521,17 @@
             <div class="carousel" id="featuredCarousel"></div>
         </div>
 
-        <!-- Updates Feed -->
         <div class="updates-section">
             <div class="section-header">
                 <h2>📢 Latest News & Updates</h2>
             </div>
-            <div class="updates-list" id="updatesList"></div>
+            <div id="updatesList"></div>
         </div>
 
-        <!-- All Games Grid -->
-        <div class="games-section">
-            <div class="section-header">
-                <h2>🎮 All Games</h2>
-            </div>
-            <div class="games-grid" id="gamesGrid"></div>
+        <div class="section-header">
+            <h2>🎮 All Games</h2>
         </div>
+        <div class="games-grid" id="gamesGrid"></div>
     </div>
 </div>
 
@@ -592,18 +544,16 @@
 </div>
 
 <script>
-    // ========== GAME DATABASE ==========
+    // ========== GAME DATABASE WITH WORKING TRAILERS ==========
     const GAMES = [
-        { name: "We Become What We Behold", icon: "📸", url: "https://ncase.itch.io/wbwwb", category: "Indie / Social", trailer: "https://www.youtube.com/embed/0k6kY8GqXqA", featured: true },
+        { name: "We Become What We Behold", icon: "📸", url: "https://ncase.itch.io/wbwwb", category: "Indie", trailer: "https://www.youtube.com/embed/8RKB5r6H5zE", featured: true },
         { name: "Fortnite", icon: "🔫", url: "https://www.fortnite.com/play", category: "Battle Royale", trailer: "https://www.youtube.com/embed/CECT-S2E2DM", featured: true },
         { name: "Call of Duty", icon: "🎯", url: "https://www.callofduty.com/warzone", category: "Shooter", trailer: "https://www.youtube.com/embed/mHDEd3efCbk", featured: true },
         { name: "GTA V", icon: "🚗", url: "https://www.rockstargames.com/gta-v", category: "Action", trailer: "https://www.youtube.com/embed/QkkoHAzjnUs", featured: false },
         { name: "Minecraft", icon: "⛏️", url: "https://www.minecraft.net", category: "Sandbox", trailer: "https://www.youtube.com/embed/MmB9b5njVbA", featured: false },
         { name: "Valorant", icon: "🎯", url: "https://playvalorant.com", category: "Shooter", trailer: "https://www.youtube.com/embed/IhhjcB2ZjFM", featured: false },
         { name: "Apex Legends", icon: "🏆", url: "https://www.ea.com/games/apex-legends", category: "Battle Royale", trailer: "https://www.youtube.com/embed/oQtHjMf3fQI", featured: false },
-        { name: "Among Us", icon: "👾", url: "https://www.innersloth.com/games/among-us", category: "Party", trailer: "https://www.youtube.com/embed/qlHAIwWJyKE", featured: false },
-        { name: "Rocket League", icon: "🚀", url: "https://www.rocketleague.com", category: "Sports", trailer: "https://www.youtube.com/embed/SgC7FqKqPqQ", featured: false },
-        { name: "Fall Guys", icon: "🫘", url: "https://www.fallguys.com", category: "Party", trailer: "https://www.youtube.com/embed/2g-bh8vR1qM", featured: false }
+        { name: "Among Us", icon: "👾", url: "https://www.innersloth.com/games/among-us", category: "Party", trailer: "https://www.youtube.com/embed/qlHAIwWJyKE", featured: false }
     ];
 
     const FEATURED_GAMES = GAMES.filter(g => g.featured);
@@ -613,12 +563,11 @@
         { text: "🎮 Fortnite Chapter 5 Season 3 - New weapons and map!", date: "April 16, 2026", type: "update" },
         { text: "🎯 Call of Duty Season 3 is now live!", date: "April 15, 2026", type: "update" },
         { text: "🚗 GTA 6 officially confirmed for 2025 release!", date: "April 14, 2026", type: "news" },
-        { text: "✨ NexusPlay now features game trailers before you play!", date: "April 13, 2026", type: "feature" }
+        { text: "✨ NexusPlay now features game trailers!", date: "April 13, 2026", type: "feature" }
     ];
 
     let selectedAvatar = "😎";
 
-    // ========== AVATAR SELECTION ==========
     function setupAvatarSelection() {
         document.querySelectorAll('#avatarGrid .avatar-option').forEach(opt => {
             opt.addEventListener('click', function() {
@@ -630,7 +579,6 @@
         document.querySelector('#avatarGrid .avatar-option')?.classList.add('selected');
     }
 
-    // ========== TRAILER FUNCTIONS ==========
     function watchTrailer(trailerUrl) {
         document.getElementById('trailerIframe').src = trailerUrl;
         document.getElementById('trailerModal').style.display = 'flex';
@@ -641,7 +589,6 @@
         document.getElementById('trailerModal').style.display = 'none';
     }
 
-    // ========== RENDER FUNCTIONS ==========
     function renderFeatured() {
         const container = document.getElementById('featuredCarousel');
         if (!container) return;
@@ -693,7 +640,7 @@
             if (update.type === 'new') { badgeClass = 'badge-new'; badgeText = 'NEW'; }
             else if (update.type === 'update') { badgeClass = 'badge-update'; badgeText = 'UPDATE'; }
             else if (update.type === 'news') { badgeClass = 'badge-news'; badgeText = 'NEWS'; }
-            else { badgeClass = 'badge-feature'; badgeText = 'FEATURE'; }
+            else { badgeClass = 'badge-update'; badgeText = 'INFO'; }
             
             const item = document.createElement('div');
             item.className = 'update-item';
@@ -706,7 +653,6 @@
         });
     }
 
-    // ========== AUTH FUNCTIONS ==========
     function signupWithAvatar() {
         const username = document.getElementById('signupUsername').value.trim();
         if (!username) {
@@ -715,7 +661,7 @@
         }
         let users = JSON.parse(localStorage.getItem('nexusplay_users') || '{}');
         if (users[username]) {
-            alert("Username taken! Try another.");
+            alert("Username taken!");
             return;
         }
         users[username] = { avatar: selectedAvatar, created: new Date().toISOString() };
@@ -743,8 +689,6 @@
         localStorage.removeItem('nexusplay_current');
         document.getElementById('mainApp').style.display = 'none';
         document.getElementById('authOverlay').style.display = 'flex';
-        document.getElementById('loginUsername').value = '';
-        document.getElementById('signupUsername').value = '';
     }
 
     function showMainApp(username, avatar) {
@@ -768,7 +712,6 @@
         document.getElementById('loginModal').style.display = 'block';
     }
 
-    // ========== CHECK AUTO LOGIN ==========
     function checkAutoLogin() {
         const currentUser = localStorage.getItem('nexusplay_current');
         if (currentUser) {
