@@ -1,305 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cloud Gaming Hub</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            color: white;
-            font-size: 48px;
-        }
-        .subtitle {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-        }
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .game-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .game-card:hover {
-            transform: translateY(-5px);
-        }
-        .play-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .play-btn:hover {
-            background: #764ba2;
-        }
-        .game-icon {
-            font-size: 48px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🎮 Cloud Gaming Hub</h1>
-        <div class="subtitle">Free browser games & cloud streaming links</div>
-        
-        <div class="game-grid" id="gameGrid"></div>
-    </div>
-
-    <script>
-        const games = [
-            { name: "2048", icon: "🧩", url: "https://play2048.co/" },
-            { name: "Slope", icon: "🏔️", url: "https://slope-game.io/" },
-            { name: "GeForce NOW", icon: "☁️", url: "https://play.geforcenow.com/" },
-            { name: "Xbox Cloud", icon: "🎮", url: "https://www.xbox.com/play" }
-        ];
-        
-        const grid = document.getElementById('gameGrid');
-        games.forEach(game => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `
-                <div class="game-icon">${game.icon}</div>
-                <h3>${game.name}</h3>
-                <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>
-            `;
-            grid.appendChild(card);
-        });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Cloud Gaming Hub</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            color: white;
-            font-size: 48px;
-        }
-        .subtitle {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-        }
-        
-        /* Sign In Box */
-        .signin-section {
-            background: white;
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        .signin-section input {
-            width: 80%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            font-size: 16px;
-            text-align: center;
-        }
-        .signin-section button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .signin-section button:hover {
-            background: #764ba2;
-        }
-        
-        /* Game Section - Hidden until signed in */
-        .game-section {
-            display: none;
-        }
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .game-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .game-card:hover {
-            transform: translateY(-5px);
-        }
-        .play-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .play-btn:hover {
-            background: #764ba2;
-        }
-        .game-icon {
-            font-size: 48px;
-        }
-        .welcome-bar {
-            background: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        .logout-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container" id="app">
-    <!-- Sign In Section -->
-    <div id="signinSection" class="signin-section">
-        <h2>🎮 Welcome to Cloud Gaming Hub</h2>
-        <p>Enter your username to start gaming</p>
-        <input type="text" id="usernameInput" placeholder="Enter your username">
-        <br>
-        <button onclick="signIn()">Start Gaming →</button>
-    </div>
-
-    <!-- Games Section (hidden until sign in) -->
-    <div id="gameSection" class="game-section">
-        <div style="text-align: center;">
-            <div class="welcome-bar">
-                👋 Welcome, <span id="displayName">Gamer</span>!
-                <button class="logout-btn" onclick="logout()">Sign Out</button>
-            </div>
-        </div>
-        <h1>🎮 Cloud Gaming Hub</h1>
-        <div class="subtitle">Click any game to play</div>
-        <div class="game-grid" id="gameGrid"></div>
-    </div>
-</div>
-
-<script>
-    // List of games
-    const games = [
-        { name: "2048", icon: "🧩", url: "https://play2048.co/" },
-        { name: "Slope", icon: "🏔️", url: "https://slope-game.io/" },
-        { name: "GeForce NOW", icon: "☁️", url: "https://play.geforcenow.com/" },
-        { name: "Xbox Cloud", icon: "🎮", url: "https://www.xbox.com/play" }
-    ];
-
-    // Display games
-    const grid = document.getElementById('gameGrid');
-    games.forEach(game => {
-        const card = document.createElement('div');
-        card.className = 'game-card';
-        card.innerHTML = `
-            <div class="game-icon">${game.icon}</div>
-            <h3>${game.name}</h3>
-            <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>const updates = [
-    { text: "🔥 Added 2 new games!", date: "April 16, 2026", badge: "NEW" },
-    // Add new updates here like this:
-    { text: "🎉 YOUR UPDATE HERE", date: "April 20, 2026", badge: "NEW" }
-];        `;
-        grid.appendChild(card);
-    });
-
-    // Sign In function
-    function signIn() {
-        const username = document.getElementById('usernameInput').value.trim();
-        if (username === "") {
-            alert("Please enter a username!");
-            return;
-        }
-        
-        // Save username
-        localStorage.setItem("gamerName", username);
-        
-        // Show games, hide sign in
-        document.getElementById('signinSection').style.display = 'none';
-        document.getElementById('gameSection').style.display = 'block';
-        document.getElementById('displayName').innerText = username;
-    }
-
-    // Logout function
-    function logout() {
-        localStorage.removeItem("gamerName");
-        document.getElementById('signinSection').style.display = 'block';
-        document.getElementById('gameSection').style.display = 'none';
-        document.getElementById('usernameInput').value = '';
-    }
-
-    // Check if user is already signed in
-    function checkLogin() {
-        const savedName = localStorage.getItem("gamerName");
-        if (savedName) {
-            document.getElementById('signinSection').style.display = 'none';
-            document.getElementById('gameSection').style.display = 'block';
-            document.getElementById('displayName').innerText = savedName;
-        }
-    }
-
-    // Run when page loads
-    checkLogin();
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>NexusPlay - Cloud Gaming Hub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusPlay - Next Gen Cloud Gaming</title>
     <style>
         * {
             margin: 0;
@@ -307,1330 +11,778 @@
             box-sizing: border-box;
         }
 
-        /* Animated Background */
         body {
-            font-family: 'Arial', sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #0a0f2a, #1a1f3a, #16213e, #0f3460);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            position: relative;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #121212;
+            color: white;
+            overflow-x: hidden;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating particles */
-        .particles {
+        /* Dark Theme Background - Epic Games Style */
+        .bg-gradient {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            background: radial-gradient(circle at 20% 50%, #1a1a2e, #0a0a0f);
+            z-index: -2;
         }
 
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            from { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            to { transform: translateY(-100vh) rotate(360deg); opacity: 1; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Auth Container */
-        .auth-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-        }
-
-        .auth-box {
-            background: rgba(255, 255, 255, 0.95);
+        /* Navigation Bar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: slideUp 0.5s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .auth-box h2 {
-            text-align: center;
-            margin-bottom: 10px;
-            color: #1a1f3a;
-        }
-
-        .auth-box p {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .auth-input {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .auth-input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .auth-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: transform 0.2s;
-        }
-
-        .auth-btn:hover {
-            transform: scale(1.02);
-        }
-
-        .switch-auth {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .switch-auth a {
-            color: #667eea;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        /* Main Game Section */
-        .main-section {
-            display: none;
-        }
-
-        /* Header with user profile */
-        .header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 15px 30px;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .logo span {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #6c5ce7, #a29bfe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            letter-spacing: -0.5px;
         }
 
-        .user-info {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
             color: white;
+        }
+
+        .user-menu {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
+            background: rgba(255,255,255,0.08);
+            padding: 6px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .logout-btn {
-            background: #ff4757;
+        .user-menu:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .user-avatar {
+            font-size: 28px;
+        }
+
+        .logout-nav {
+            background: none;
             border: none;
-            padding: 5px 15px;
-            border-radius: 20px;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 13px;
+            margin-left: 8px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin: 50px 0 30px 0;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #a29bfe, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: #888;
+            font-size: 18px;
+        }
+
+        /* Featured Carousel */
+        .featured-section {
+            margin: 40px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 0 20px 0;
+        }
+
+        .carousel::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .carousel::-webkit-scrollbar-track {
+            background: #2a2a2a;
+            border-radius: 10px;
+        }
+
+        .carousel::-webkit-scrollbar-thumb {
+            background: #6c5ce7;
+            border-radius: 10px;
+        }
+
+        .featured-card {
+            min-width: 320px;
+            background: linear-gradient(135deg, #1e1e2e, #16162a);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+            border-color: rgba(108,92,231,0.4);
+        }
+
+        .featured-image {
+            height: 180px;
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .featured-info {
+            padding: 20px;
+        }
+
+        .featured-info h3 {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .featured-info p {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-trailer {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px 18px;
+            border-radius: 40px;
             color: white;
             cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
         }
 
-        .logout-btn:hover {
-            background: #ff6b81;
+        .btn-trailer:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .btn-play {
+            background: #6c5ce7;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-play:hover {
+            background: #5b4bc4;
+            transform: scale(1.02);
         }
 
         /* Updates Section */
         .updates-section {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(30,30,46,0.6);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 30px;
+            padding: 25px;
+            margin: 40px 0;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .updates-title {
-            color: white;
-            font-size: 24px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .updates-list {
+            margin-top: 15px;
         }
 
         .update-item {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 15px;
-            margin: 10px 0;
             display: flex;
             align-items: center;
             gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .update-badge {
-            background: #667eea;
-            color: white;
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
         }
 
-        .update-text {
-            color: #333;
-            flex: 1;
+        .badge-new { background: #ff4757; }
+        .badge-update { background: #6c5ce7; }
+        .badge-news { background: #ffa502; }
+        .badge-feature { background: #2ed573; }
+
+        .update-text { color: #ddd; flex: 1; font-size: 14px; }
+        .update-date { color: #666; font-size: 12px; }
+
+        /* Games Grid */
+        .games-section {
+            margin: 50px 0;
         }
 
-        .update-date {
-            color: #999;
-            font-size: 12px;
-        }
-
-        /* Game Grid */
-        .game-grid {
+        .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 25px;
-            margin-top: 20px;
         }
 
         .game-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
+            background: #1a1a2a;
+            border-radius: 16px;
+            padding: 25px 20px;
             text-align: center;
             transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+            border-color: #6c5ce7;
+            box-shadow: 0 10px 25px rgba(108,92,231,0.2);
         }
 
         .game-icon {
-            font-size: 64px;
+            font-size: 56px;
             margin-bottom: 15px;
         }
 
         .game-card h3 {
-            color: #1a1f3a;
-            margin-bottom: 10px;
+            font-size: 18px;
+            margin-bottom: 6px;
         }
 
-        .play-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .game-category {
+            color: #6c5ce7;
+            font-size: 12px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .game-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .game-trailer-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 30px;
             color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .game-play-btn {
+            background: #6c5ce7;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-size: 11px;
             text-decoration: none;
             display: inline-block;
-            margin-top: 15px;
-            transition: all 0.3s;
+            font-weight: 600;
         }
 
-        .play-btn:hover {
-            transform: scale(1.05);
-        }
-
-        h1 {
-            text-align: center;
-            color: white;
-            font-size: 48px;
-            margin: 20px 0;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="particles" id="particles"></div>
-
-<div class="container">
-    <!-- Auth Section -->
-    <div id="authSection" class="auth-container">
-        <div class="auth-box" id="loginBox">
-            <h2>🎮 Welcome to NexusPlay</h2>
-            <p>Sign in to start your gaming journey</p>
-            <input type="text" id="loginUsername" class="auth-input" placeholder="Username">
-            <button class="auth-btn" onclick="login()">Sign In →</button>
-            <div class="switch-auth">
-                <a onclick="showSignup()">Don't have an account? Create one →</a>
-            </div>
-        </div>
-
-        <div class="auth-box" id="signupBox" style="display: none;">
-            <h2>✨ Create Account</h2>
-            <p>No email needed. Just pick a username!</p>
-            <input type="text" id="signupUsername" class="auth-input" placeholder="Choose a username">
-            <button class="auth-btn" onclick="signup()">Create Account →</button>
-            <div class="switch-auth">
-                <a onclick="showLogin()">Already have an account? Sign in →</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Game Section -->
-    <div id="mainSection" class="main-section">
-        <div class="header">
-            <div class="logo">🎮 Nexus<span>Play</span></div>
-            <div class="user-info">
-                👤 <span id="currentUser">Gamer</span>
-                <button class="logout-btn" onclick="logout()">Sign Out</button>
-            </div>
-        </div>
-
-        <h1>🚀 Cloud Gaming Hub</h1>
-        <div class="subtitle">Play instantly. No downloads. No limits.</div>
-
-        <!-- Updates Section -->
-        <div class="updates-section">
-            <div class="updates-title">
-                📢 What's New
-                <span style="font-size: 14px; background: #ff4757; padding: 2px 10px; border-radius: 20px;">Live</span>
-            </div>
-            <div id="updatesList"></div>
-        </div>
-
-        <!-- Games Grid -->
-        <div class="game-grid" id="gameGrid"></div>
-    </div>
-</div>
-
-<script>
-    // Games database
-    const games = [
-        { name: "2048", icon: "🧩", url: "https://play2048.co/", category: "Puzzle" },
-        { name: "Slope", icon: "🏔️", url: "https://slope-game.io/", category: "Arcade" },
-        { name: "GeForce NOW", icon: "☁️", url: "https://play.geforcenow.com/", category: "Cloud" },
-        { name: "Xbox Cloud", icon: "🎮", url: "https://www.xbox.com/play", category: "Cloud" },
-        { name: "Tetris", icon: "🔲", url: "https://tetris.com/play-tetris", category: "Puzzle" },
-        { name: "Fireboy & Watergirl", icon: "🔥", url: "https://coolmathgames.com/0-fireboy-and-watergirl", category: "Adventure" }
-    ];
-
-    // Updates database (you can add more!)
-    const updates = [
-        { text: "🔥 Added 2 new games to the library!", date: "April 16, 2026", badge: "NEW" },
-        { text: "✨ Create accounts with any username - no email needed!", date: "April 15, 2026", badge: "FEATURE" },
-        { text: "🎨 Animated background and smoother UI", date: "April 14, 2026", badge: "UPDATE" },
-        { text: "🚀 Cloud Gaming Hub launched!", date: "April 13, 2026", badge: "LAUNCH" }
-    ];
-
-    // Load games
-    function loadGames() {
-        const grid = document.getElementById('gameGrid');
-        grid.innerHTML = '';
-        games.forEach(game => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `
-                <div class="game-icon">${game.icon}</div>
-                <h3>${game.name}</h3>
-                <small style="color: #999;">${game.category}</small>
-                <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>
-            `;
-            grid.appendChild(card);
-        });
-    }
-
-    // Load updates
-    function loadUpdates() {
-        const updatesDiv = document.getElementById('updatesList');
-        updatesDiv.innerHTML = '';
-        updates.forEach(update => {
-            const item = document.createElement('div');
-            item.className = 'update-item';
-            item.innerHTML = `
-                <div class="update-badge" style="background: ${update.badge === 'NEW' ? '#ff4757' : '#667eea'}">${update.badge}</div>
-                <div class="update-text">${update.text}</div>
-                <div class="update-date">${update.date}</div>
-            `;
-            updatesDiv.appendChild(item);
-        });
-    }
-
-    // Account functions
-    function signup() {
-        const username = document.getElementById('signupUsername').value.trim();
-        if (username === "") {
-            alert("Please enter a username!");
-            return;
-        }
-        
-        // Check if username exists
-        let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
-        if (users[username]) {
-            alert("Username already taken! Try another one.");
-            return;
-        }
-        
-        // Create account
-        users[username] = { created: new Date().toISOString() };
-        localStorage.setItem("nexusplay_users", JSON.stringify(users));
-        localStorage.setItem("nexusplay_current", username);
-        
-        showMainSection(username);
-    }
-
-    function login() {
-        const username = document.getElementById('loginUsername').value.trim();
-        if (username === "") {
-            alert("Please enter your username!");
-            return;
-        }
-        
-        let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
-        if (!users[username]) {
-            alert("Username not found! Create an account first.");
-            return;
-        }
-        
-        localStorage.setItem("nexusplay_current", username);
-        showMainSection(username);
-    }
-
-    function logout() {
-        localStorage.removeItem("nexusplay_current");
-        document.getElementById('mainSection').style.display = 'none';
-        document.getElementById('authSection').style.display = 'flex';
-        document.getElementById('loginUsername').value = '';
-        document.getElementById('signupUsername').value = '';
-    }
-
-    function showMainSection(username) {
-        document.getElementById('authSection').style.display = 'none';
-        document.getElementById('mainSection').style.display = 'block';
-        document.getElementById('currentUser').innerText = username;
-        loadGames();
-        loadUpdates();
-    }
-
-    function showSignup() {
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('signupBox').style.display = 'block';
-    }
-
-    function showLogin() {
-        document.getElementById('signupBox').style.display = 'none';
-        document.getElementById('loginBox').style.display = 'block';
-    }
-
-    // Check if user is already logged in
-    function checkLogin() {
-        const current = localStorage.getItem("nexusplay_current");
-        if (current) {
-            let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
-            if (users[current]) {
-                showMainSection(current);
-                return;
-            }
-        }
-        document.getElementById('authSection').style.display = 'flex';
-        document.getElementById('mainSection').style.display = 'none';
-    }
-
-    // Create floating particles
-    function createParticles() {
-        const container = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.width = Math.random() * 5 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = Math.random() * 20 + 10 + 's';
-            particle.style.animationDelay = Math.random() * 10 + 's';
-            container.appendChild(particle);
-        }
-    }
-
-    // Initialize
-    createParticles();
-    checkLogin();
-</script>
-
-</body>
-</html>
-{ name: "Fortnite", icon: "🔫", url: "https://www.fortnite.com/play", category: "Battle Royale" },
-{ name: "Call of Duty: Warzone", icon: "🎯", url: "https://www.callofduty.com/warzone", category: "Shooter" },
-{ name: "GTA V", icon: "🚗", url: "https://www.rockstargames.com/gta-v", category: "Action" },
-{ name: "Valorant", icon: "🎯", url: "https://playvalorant.com", category: "Shooter" },
-{ name: "Minecraft", icon: "⛏️", url: "https://www.minecraft.net", category: "Sandbox" },
-{ name: "Apex Legends", icon: "🏆", url: "https://www.ea.com/games/apex-legends", category: "Battle Royale" }
-// Add this to your updates array
-const updates = [
-    { text: "🎮 Fortnite Chapter 5 Season 3 - New map and weapons!", date: "April 16, 2026", badge: "NEW" },
-    { text: "🎯 Call of Duty: Modern Warfare 3 Season 3 live now!", date: "April 15, 2026", badge: "UPDATE" },
-    { text: "🚗 GTA 6 officially confirmed for 2025 release!", date: "April 14, 2026", badge: "NEWS" },
-    { text: "✨ New cloud games added to the hub!", date: "April 13, 2026", badge: "FEATURE" }
-];
-// Add this to your games array
-{ name: "GTA 6 Trailer", icon: "🎬", url: "https://youtube.com/watch?v=QdBZY2fkU-0", category: "Trailer" },
-{ name: "Fortnite Trailer", icon: "📺", url: "https://youtube.com/watch?v/CECT-S2E2DM", category: "Trailer" }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>NexusPlay - Cloud Gaming Hub</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #0a0f2a, #1a1f3a, #16213e, #0f3460);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .auth-container {
+        /* Auth Modal */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.96);
+            z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 80vh;
         }
 
-        .auth-box {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
+        .auth-modal {
+            background: #1a1a2a;
+            border-radius: 24px;
             padding: 40px;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .auth-modal h2 {
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+            font-size: 28px;
         }
 
-        .auth-box h2 {
-            margin-bottom: 10px;
-            color: #1a1f3a;
+        .auth-modal p {
+            text-align: center;
+            color: #888;
+            margin-bottom: 25px;
         }
 
-        .auth-input {
+        .auth-modal input {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             margin: 10px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
+            background: #252540;
+            border: 1px solid #333355;
+            border-radius: 12px;
+            color: white;
             font-size: 16px;
+        }
+
+        .auth-modal input:focus {
+            outline: none;
+            border-color: #6c5ce7;
+        }
+
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .avatar-option {
+            text-align: center;
+            padding: 12px;
+            background: #252540;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .avatar-option.selected {
+            border-color: #6c5ce7;
+            background: #353560;
+        }
+
+        .avatar-emoji {
+            font-size: 36px;
         }
 
         .auth-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            padding: 14px;
+            background: #6c5ce7;
             border: none;
-            border-radius: 50px;
-            font-size: 18px;
+            border-radius: 40px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .switch-auth {
-            margin-top: 20px;
-        }
-
-        .switch-auth a {
-            color: #667eea;
-            cursor: pointer;
-        }
-
-        .main-section {
-            display: none;
-        }
-
-        .header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .user-info {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logout-btn {
-            background: #ff4757;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .updates-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .updates-title {
-            color: white;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .update-item {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 15px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .update-badge {
-            background: #667eea;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-
-        .update-text {
-            color: #333;
-            flex: 1;
-        }
-
-        .update-date {
-            color: #999;
-            font-size: 12px;
-        }
-
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .game-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .game-icon {
-            font-size: 64px;
-            margin-bottom: 15px;
-        }
-
-        .play-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
             margin-top: 15px;
         }
 
-        h1 {
+        .switch-link {
             text-align: center;
-            color: white;
-            font-size: 48px;
-            margin: 20px 0;
+            margin-top: 20px;
+            color: #6c5ce7;
+            cursor: pointer;
         }
 
-        .subtitle {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <!-- Sign In Section -->
-    <div id="authSection" class="auth-container">
-        <div class="auth-box" id="loginBox">
-            <h2>🎮 Welcome to NexusPlay</h2>
-            <p>Sign in to start gaming</p>
-            <input type="text" id="loginUsername" class="auth-input" placeholder="Username">
-            <button class="auth-btn" onclick="login()">Sign In →</button>
-            <div class="switch-auth">
-                <a onclick="showSignup()">No account? Create one →</a>
-            </div>
-        </div>
-
-        <div class="auth-box" id="signupBox" style="display: none;">
-            <h2>✨ Create Account</h2>
-            <p>Pick any username - no email needed!</p>
-            <input type="text" id="signupUsername" class="auth-input" placeholder="Choose username">
-            <button class="auth-btn" onclick="signup()">Create Account →</button>
-            <div class="switch-auth">
-                <a onclick="showLogin()">Already have an account? Sign in →</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Game Section -->
-    <div id="mainSection" class="main-section">
-        <div class="header">
-            <div class="logo">🎮 Nexus<span style="background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Play</span></div>
-            <div class="user-info">
-                👤 <span id="currentUser">Gamer</span>
-                <button class="logout-btn" onclick="logout()">Sign Out</button>
-            </div>
-        </div>
-
-        <h1>🎮 Cloud Gaming Hub</h1>
-        <div class="subtitle">Click any game to play - Official links</div>
-
-        <!-- Updates Section -->
-        <div class="updates-section">
-            <div class="updates-title">📢 Gaming News & Updates</div>
-            <div id="updatesList"></div>
-        </div>
-
-        <!-- Games Grid -->
-        <div class="game-grid" id="gameGrid"></div>
-    </div>
-</div>
-
-<script>
-    // Games with OFFICIAL links
-    const games = [
-        { name: "Fortnite", icon: "🔫", url: "https://www.fortnite.com/play", category: "Battle Royale" },
-        { name: "Call of Duty", icon: "🎯", url: "https://www.callofduty.com/warzone", category: "Shooter" },
-        { name: "GTA V", icon: "🚗", url: "https://www.rockstargames.com/gta-v", category: "Action" },
-        { name: "Minecraft", icon: "⛏️", url: "https://www.minecraft.net", category: "Sandbox" },
-        { name: "Valorant", icon: "🎯", url: "https://playvalorant.com", category: "Shooter" },
-        { name: "Apex Legends", icon: "🏆", url: "https://www.ea.com/games/apex-legends", category: "Battle Royale" },
-        { name: "Rocket League", icon: "🚀", url: "https://www.rocketleague.com", category: "Sports" },
-        { name: "Among Us", icon: "👾", url: "https://www.innersloth.com/games/among-us", category: "Party" }
-    ];
-
-    // Gaming News Updates
-    const updates = [
-        { text: "🎮 Fortnite Chapter 5 Season 3 - New weapons and map!", date: "April 16, 2026", badge: "NEW" },
-        { text: "🎯 Call of Duty: Modern Warfare 3 Season 3 is live!", date: "April 15, 2026", badge: "UPDATE" },
-        { text: "🚗 GTA 6 officially coming 2025 - New trailer drops soon!", date: "April 14, 2026", badge: "NEWS" },
-        { text: "✨ NexusPlay added 8 official game links!", date: "April 13, 2026", badge: "FEATURE" }
-    ];
-
-    function loadGames() {
-        const grid = document.getElementById('gameGrid');
-        grid.innerHTML = '';
-        games.forEach(game => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `
-                <div class="game-icon">${game.icon}</div>
-                <h3>${game.name}</h3>
-                <small style="color: #999;">${game.category}</small>
-                <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>
-            `;
-            grid.appendChild(card);
-        });
-    }
-
-    function loadUpdates() {
-        const updatesDiv = document.getElementById('updatesList');
-        updatesDiv.innerHTML = '';
-        updates.forEach(update => {
-            const item = document.createElement('div');
-            item.className = 'update-item';
-            item.innerHTML = `
-                <div class="update-badge" style="background: ${update.badge === 'NEW' ? '#ff4757' : '#667eea'}">${update.badge}</div>
-                <div class="update-text">${update.text}</div>
-                <div class="update-date">${update.date}</div>
-            `;
-            updatesDiv.appendChild(item);
-        });
-    }
-
-    // SIGN UP FUNCTION - WORKS!
-    function signup() {
-        const username = document.getElementById('signupUsername').value.trim();
-        if (username === "") {
-            alert("Please enter a username!");
-            return;
-        }
-        
-        let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
-        if (users[username]) {
-            alert("Username taken! Try another.");
-            return;
-        }
-        
-        users[username] = { created: new Date().toISOString() };
-        localStorage.setItem("nexusplay_users", JSON.stringify(users));
-        localStorage.setItem("nexusplay_current", username);
-        
-        showMainSection(username);
-    }
-
-    // LOGIN FUNCTION - WORKS!
-    function login() {
-        const username = document.getElementById('loginUsername').value.trim();
-        if (username === "") {
-            alert("Please enter your username!");
-            return;
-        }
-        
-        let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
-        if (!users[username]) {
-            alert("Username not found! Create an account first.");
-            return;
-        }
-        
-        localStorage.setItem("nexusplay_current", username);
-        showMainSection(username);
-    }
-
-    function logout() {
-        localStorage.removeItem("nexusplay_current");
-        document.getElementById('mainSection').style.display = 'none';
-        document.getElementById('authSection').style.display = 'flex';
-        document.getElementById('loginUsername').value = '';
-        document.getElementById('signupUsername').value = '';
-    }
-
-    function showMainSection(username) {
-        document.getElementById('authSection').style.display = 'none';
-        document.getElementById('mainSection').style.display = 'block';
-        document.getElementById('currentUser').innerHTML = username;
-        loadGames();
-        loadUpdates();
-    }
-
-    function showSignup() {
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('signupBox').style.display = 'block';
-    }
-
-    function showLogin() {
-        document.getElementById('signupBox').style.display = 'none';
-        document.getElementById('loginBox').style.display = 'block';
-    }
-
-    // Check if already logged in
-    function checkLogin() {
-        const current = localStorage.getItem("nexusplay_current");
-        if (current) {
-            let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
-            if (users[current]) {
-                showMainSection(current);
-                return;
-            }
-        }
-        document.getElementById('authSection').style.display = 'flex';
-        document.getElementById('mainSection').style.display = 'none';
-    }
-
-    checkLogin();
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
-    <title>NexusPlay - Cloud Gaming Hub</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #0a0f2a, #1a1f3a, #16213e, #0f3460);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .auth-container {
-            display: flex;
+        /* Trailer Modal */
+        .trailer-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1100;
             justify-content: center;
             align-items: center;
-            min-height: 80vh;
         }
 
-        .auth-box {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
+        .trailer-content {
+            background: #1a1a2a;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 900px;
+            width: 90%;
+        }
+
+        .trailer-content iframe {
             width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            height: 450px;
+            border-radius: 12px;
         }
 
-        .auth-box h2 {
+        .close-trailer {
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
             margin-bottom: 10px;
-            color: #1a1f3a;
-        }
-
-        .auth-input {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            font-size: 16px;
-        }
-
-        .auth-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 20px;
         }
 
-        .switch-auth {
-            margin-top: 20px;
-        }
-
-        .switch-auth a {
-            color: #667eea;
-            cursor: pointer;
-        }
-
-        .main-section {
+        .main-app {
             display: none;
         }
 
-        .header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .user-info {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logout-btn {
-            background: #ff4757;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .updates-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .updates-title {
-            color: white;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .update-item {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 15px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .update-badge {
-            background: #667eea;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-
-        .update-text {
-            color: #333;
-            flex: 1;
-        }
-
-        .update-date {
-            color: #999;
-            font-size: 12px;
-        }
-
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .game-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .game-icon {
-            font-size: 64px;
-            margin-bottom: 15px;
-        }
-
-        .play-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-        }
-
-        h1 {
-            text-align: center;
-            color: white;
-            font-size: 48px;
-            margin: 20px 0;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 30px;
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .navbar { padding: 12px 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 32px; }
+            .featured-card { min-width: 280px; }
+            .trailer-content iframe { height: 250px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- Sign In Section -->
-    <div id="authSection" class="auth-container">
-        <div class="auth-box" id="loginBox">
-            <h2>🎮 Welcome to NexusPlay</h2>
-            <p>Sign in to start gaming</p>
-            <input type="text" id="loginUsername" class="auth-input" placeholder="Username">
-            <button class="auth-btn" onclick="login()">Sign In →</button>
-            <div class="switch-auth">
-                <a onclick="showSignup()">No account? Create one →</a>
-            </div>
+<div class="bg-gradient"></div>
+
+<!-- AUTH SECTION -->
+<div id="authOverlay" class="auth-overlay">
+    <div class="auth-modal">
+        <div id="loginModal">
+            <h2>🎮 NexusPlay</h2>
+            <p>Sign in to access the ultimate gaming hub</p>
+            <input type="text" id="loginUsername" placeholder="Username">
+            <button class="auth-btn" onclick="login()">Sign In</button>
+            <div class="switch-link" onclick="showSignupModal()">✨ Create Free Account →</div>
         </div>
 
-        <div class="auth-box" id="signupBox" style="display: none;">
+        <div id="signupModal" style="display: none;">
             <h2>✨ Create Account</h2>
-            <p>Pick any username - no email needed!</p>
-            <input type="text" id="signupUsername" class="auth-input" placeholder="Choose username">
-            <button class="auth-btn" onclick="signup()">Create Account →</button>
-            <div class="switch-auth">
-                <a onclick="showLogin()">Already have an account? Sign in →</a>
+            <p>Choose a username and your avatar</p>
+            <input type="text" id="signupUsername" placeholder="Username">
+            <div class="avatar-grid" id="avatarGrid">
+                <div class="avatar-option" data-avatar="😎"><div class="avatar-emoji">😎</div><div style="font-size:10px">Cool</div></div>
+                <div class="avatar-option" data-avatar="🦸"><div class="avatar-emoji">🦸</div><div style="font-size:10px">Hero</div></div>
+                <div class="avatar-option" data-avatar="🐱"><div class="avatar-emoji">🐱</div><div style="font-size:10px">Cat</div></div>
+                <div class="avatar-option" data-avatar="🤖"><div class="avatar-emoji">🤖</div><div style="font-size:10px">Robot</div></div>
+                <div class="avatar-option" data-avatar="👑"><div class="avatar-emoji">👑</div><div style="font-size:10px">King</div></div>
+                <div class="avatar-option" data-avatar="🧙"><div class="avatar-emoji">🧙</div><div style="font-size:10px">Wizard</div></div>
+                <div class="avatar-option" data-avatar="👾"><div class="avatar-emoji">👾</div><div style="font-size:10px">Alien</div></div>
+                <div class="avatar-option" data-avatar="🔥"><div class="avatar-emoji">🔥</div><div style="font-size:10px">Fire</div></div>
             </div>
+            <button class="auth-btn" onclick="signupWithAvatar()">Create Account</button>
+            <div class="switch-link" onclick="showLoginModal()">← Back to Sign In</div>
         </div>
     </div>
+</div>
 
-    <!-- Main Game Section -->
-    <div id="mainSection" class="main-section">
-        <div class="header">
-            <div class="logo">🎮 Nexus<span style="background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Play</span></div>
-            <div class="user-info">
-                👤 <span id="currentUser">Gamer</span>
-                <button class="logout-btn" onclick="logout()">Sign Out</button>
+<!-- MAIN APP -->
+<div id="mainApp" class="main-app">
+    <nav class="navbar">
+        <div class="logo">⚡ NEXUSPLAY</div>
+        <div class="nav-links">
+            <a href="#">STORE</a>
+            <a href="#">BROWSE</a>
+            <a href="#">UPDATES</a>
+        </div>
+        <div class="user-menu">
+            <span class="user-avatar" id="navAvatar">😎</span>
+            <span id="navUsername">Gamer</span>
+            <button class="logout-nav" onclick="logout()">Sign Out</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Next-Gen Cloud Gaming</h1>
+            <p>Watch trailers • Play instantly • Stay updated with the latest gaming news</p>
+        </div>
+
+        <!-- Featured Carousel -->
+        <div class="featured-section">
+            <div class="section-header">
+                <h2>⭐ Featured Games</h2>
             </div>
+            <div class="carousel" id="featuredCarousel"></div>
         </div>
 
-        <h1>🎮 Cloud Gaming Hub</h1>
-        <div class="subtitle">Click any game to play - Official links</div>
-
-        <!-- Updates Section -->
+        <!-- Updates Feed -->
         <div class="updates-section">
-            <div class="updates-title">📢 Gaming News & Updates</div>
-            <div id="updatesList"></div>
+            <div class="section-header">
+                <h2>📢 Latest News & Updates</h2>
+            </div>
+            <div class="updates-list" id="updatesList"></div>
         </div>
 
-        <!-- Games Grid -->
-        <div class="game-grid" id="gameGrid"></div>
+        <!-- All Games Grid -->
+        <div class="games-section">
+            <div class="section-header">
+                <h2>🎮 All Games</h2>
+            </div>
+            <div class="games-grid" id="gamesGrid"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Trailer Modal -->
+<div id="trailerModal" class="trailer-modal">
+    <div class="trailer-content">
+        <span class="close-trailer" onclick="closeTrailer()">&times;</span>
+        <iframe id="trailerIframe" src="" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
 <script>
-    // Games with OFFICIAL links - NOW WITH WE BECOME WHAT WE BEHOLD!
-    const games = [
-        { name: "We Become What We Behold", icon: "📸", url: "https://ncase.itch.io/wbwwb", category: "Indie/Social" },
-        { name: "Fortnite", icon: "🔫", url: "https://www.fortnite.com/play", category: "Battle Royale" },
-        { name: "Call of Duty", icon: "🎯", url: "https://www.callofduty.com/warzone", category: "Shooter" },
-        { name: "GTA V", icon: "🚗", url: "https://www.rockstargames.com/gta-v", category: "Action" },
-        { name: "Minecraft", icon: "⛏️", url: "https://www.minecraft.net", category: "Sandbox" },
-        { name: "Valorant", icon: "🎯", url: "https://playvalorant.com", category: "Shooter" },
-        { name: "Apex Legends", icon: "🏆", url: "https://www.ea.com/games/apex-legends", category: "Battle Royale" },
-        { name: "Rocket League", icon: "🚀", url: "https://www.rocketleague.com", category: "Sports" },
-        { name: "Among Us", icon: "👾", url: "https://www.innersloth.com/games/among-us", category: "Party" }
+    // ========== GAME DATABASE ==========
+    const GAMES = [
+        { name: "We Become What We Behold", icon: "📸", url: "https://ncase.itch.io/wbwwb", category: "Indie / Social", trailer: "https://www.youtube.com/embed/0k6kY8GqXqA", featured: true },
+        { name: "Fortnite", icon: "🔫", url: "https://www.fortnite.com/play", category: "Battle Royale", trailer: "https://www.youtube.com/embed/CECT-S2E2DM", featured: true },
+        { name: "Call of Duty", icon: "🎯", url: "https://www.callofduty.com/warzone", category: "Shooter", trailer: "https://www.youtube.com/embed/mHDEd3efCbk", featured: true },
+        { name: "GTA V", icon: "🚗", url: "https://www.rockstargames.com/gta-v", category: "Action", trailer: "https://www.youtube.com/embed/QkkoHAzjnUs", featured: false },
+        { name: "Minecraft", icon: "⛏️", url: "https://www.minecraft.net", category: "Sandbox", trailer: "https://www.youtube.com/embed/MmB9b5njVbA", featured: false },
+        { name: "Valorant", icon: "🎯", url: "https://playvalorant.com", category: "Shooter", trailer: "https://www.youtube.com/embed/IhhjcB2ZjFM", featured: false },
+        { name: "Apex Legends", icon: "🏆", url: "https://www.ea.com/games/apex-legends", category: "Battle Royale", trailer: "https://www.youtube.com/embed/oQtHjMf3fQI", featured: false },
+        { name: "Among Us", icon: "👾", url: "https://www.innersloth.com/games/among-us", category: "Party", trailer: "https://www.youtube.com/embed/qlHAIwWJyKE", featured: false },
+        { name: "Rocket League", icon: "🚀", url: "https://www.rocketleague.com", category: "Sports", trailer: "https://www.youtube.com/embed/SgC7FqKqPqQ", featured: false },
+        { name: "Fall Guys", icon: "🫘", url: "https://www.fallguys.com", category: "Party", trailer: "https://www.youtube.com/embed/2g-bh8vR1qM", featured: false }
     ];
 
-    // Gaming News Updates
-    const updates = [
-        { text: "📸 NEW GAME: We Become What We Behold - A 5-minute social media simulator!", date: "April 17, 2026", badge: "NEW" },
-        { text: "🎮 Fortnite Chapter 5 Season 3 - New weapons and map!", date: "April 16, 2026", badge: "UPDATE" },
-        { text: "🎯 Call of Duty: Modern Warfare 3 Season 3 is live!", date: "April 15, 2026", badge: "UPDATE" },
-        { text: "🚗 GTA 6 officially coming 2025 - New trailer drops soon!", date: "April 14, 2026", badge: "NEWS" },
-        { text: "✨ NexusPlay added 9 official game links!", date: "April 13, 2026", badge: "FEATURE" }
+    const FEATURED_GAMES = GAMES.filter(g => g.featured);
+
+    const UPDATES = [
+        { text: "📸 We Become What We Behold added to the library!", date: "April 17, 2026", type: "new" },
+        { text: "🎮 Fortnite Chapter 5 Season 3 - New weapons and map!", date: "April 16, 2026", type: "update" },
+        { text: "🎯 Call of Duty Season 3 is now live!", date: "April 15, 2026", type: "update" },
+        { text: "🚗 GTA 6 officially confirmed for 2025 release!", date: "April 14, 2026", type: "news" },
+        { text: "✨ NexusPlay now features game trailers before you play!", date: "April 13, 2026", type: "feature" }
     ];
 
-    function loadGames() {
-        const grid = document.getElementById('gameGrid');
-        grid.innerHTML = '';
-        games.forEach(game => {
+    let selectedAvatar = "😎";
+
+    // ========== AVATAR SELECTION ==========
+    function setupAvatarSelection() {
+        document.querySelectorAll('#avatarGrid .avatar-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('#avatarGrid .avatar-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedAvatar = this.getAttribute('data-avatar');
+            });
+        });
+        document.querySelector('#avatarGrid .avatar-option')?.classList.add('selected');
+    }
+
+    // ========== TRAILER FUNCTIONS ==========
+    function watchTrailer(trailerUrl) {
+        document.getElementById('trailerIframe').src = trailerUrl;
+        document.getElementById('trailerModal').style.display = 'flex';
+    }
+
+    function closeTrailer() {
+        document.getElementById('trailerIframe').src = '';
+        document.getElementById('trailerModal').style.display = 'none';
+    }
+
+    // ========== RENDER FUNCTIONS ==========
+    function renderFeatured() {
+        const container = document.getElementById('featuredCarousel');
+        if (!container) return;
+        container.innerHTML = '';
+        FEATURED_GAMES.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'featured-card';
+            card.innerHTML = `
+                <div class="featured-image">${game.icon}</div>
+                <div class="featured-info">
+                    <h3>${game.name}</h3>
+                    <p>${game.category}</p>
+                    <div class="btn-group">
+                        <button class="btn-trailer" onclick="watchTrailer('${game.trailer}')">🎬 Watch Trailer</button>
+                        <a href="${game.url}" target="_blank" class="btn-play">Play Now →</a>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderGames() {
+        const container = document.getElementById('gamesGrid');
+        if (!container) return;
+        container.innerHTML = '';
+        GAMES.forEach(game => {
             const card = document.createElement('div');
             card.className = 'game-card';
             card.innerHTML = `
                 <div class="game-icon">${game.icon}</div>
                 <h3>${game.name}</h3>
-                <small style="color: #999;">${game.category}</small>
-                <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>
+                <span class="game-category">${game.category}</span>
+                <div class="game-buttons">
+                    <button class="game-trailer-btn" onclick="watchTrailer('${game.trailer}')">🎬 Trailer</button>
+                    <a href="${game.url}" target="_blank" class="game-play-btn">Play →</a>
+                </div>
             `;
-            grid.appendChild(card);
+            container.appendChild(card);
         });
     }
 
-    function loadUpdates() {
-        const updatesDiv = document.getElementById('updatesList');
-        updatesDiv.innerHTML = '';
-        updates.forEach(update => {
+    function renderUpdates() {
+        const container = document.getElementById('updatesList');
+        if (!container) return;
+        container.innerHTML = '';
+        UPDATES.forEach(update => {
+            let badgeClass = '', badgeText = '';
+            if (update.type === 'new') { badgeClass = 'badge-new'; badgeText = 'NEW'; }
+            else if (update.type === 'update') { badgeClass = 'badge-update'; badgeText = 'UPDATE'; }
+            else if (update.type === 'news') { badgeClass = 'badge-news'; badgeText = 'NEWS'; }
+            else { badgeClass = 'badge-feature'; badgeText = 'FEATURE'; }
+            
             const item = document.createElement('div');
             item.className = 'update-item';
             item.innerHTML = `
-                <div class="update-badge" style="background: ${update.badge === 'NEW' ? '#ff4757' : '#667eea'}">${update.badge}</div>
+                <div class="update-badge ${badgeClass}">${badgeText}</div>
                 <div class="update-text">${update.text}</div>
                 <div class="update-date">${update.date}</div>
             `;
-            updatesDiv.appendChild(item);
+            container.appendChild(item);
         });
     }
 
-    // SIGN UP FUNCTION
-    function signup() {
+    // ========== AUTH FUNCTIONS ==========
+    function signupWithAvatar() {
         const username = document.getElementById('signupUsername').value.trim();
-        if (username === "") {
+        if (!username) {
             alert("Please enter a username!");
             return;
         }
-        
-        let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
+        let users = JSON.parse(localStorage.getItem('nexusplay_users') || '{}');
         if (users[username]) {
             alert("Username taken! Try another.");
             return;
         }
-        
-        users[username] = { created: new Date().toISOString() };
-        localStorage.setItem("nexusplay_users", JSON.stringify(users));
-        localStorage.setItem("nexusplay_current", username);
-        
-        showMainSection(username);
+        users[username] = { avatar: selectedAvatar, created: new Date().toISOString() };
+        localStorage.setItem('nexusplay_users', JSON.stringify(users));
+        localStorage.setItem('nexusplay_current', username);
+        showMainApp(username, selectedAvatar);
     }
 
-    // LOGIN FUNCTION
     function login() {
         const username = document.getElementById('loginUsername').value.trim();
-        if (username === "") {
-            alert("Please enter your username!");
+        if (!username) {
+            alert("Enter your username!");
             return;
         }
-        
-        let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
+        let users = JSON.parse(localStorage.getItem('nexusplay_users') || '{}');
         if (!users[username]) {
             alert("Username not found! Create an account first.");
             return;
         }
-        
-        localStorage.setItem("nexusplay_current", username);
-        showMainSection(username);
+        localStorage.setItem('nexusplay_current', username);
+        showMainApp(username, users[username].avatar);
     }
 
     function logout() {
-        localStorage.removeItem("nexusplay_current");
-        document.getElementById('mainSection').style.display = 'none';
-        document.getElementById('authSection').style.display = 'flex';
+        localStorage.removeItem('nexusplay_current');
+        document.getElementById('mainApp').style.display = 'none';
+        document.getElementById('authOverlay').style.display = 'flex';
         document.getElementById('loginUsername').value = '';
         document.getElementById('signupUsername').value = '';
     }
 
-    function showMainSection(username) {
-        document.getElementById('authSection').style.display = 'none';
-        document.getElementById('mainSection').style.display = 'block';
-        document.getElementById('currentUser').innerHTML = username;
-        loadGames();
-        loadUpdates();
+    function showMainApp(username, avatar) {
+        document.getElementById('authOverlay').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'block';
+        document.getElementById('navUsername').innerText = username;
+        document.getElementById('navAvatar').innerText = avatar;
+        renderFeatured();
+        renderGames();
+        renderUpdates();
     }
 
-    function showSignup() {
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('signupBox').style.display = 'block';
+    function showSignupModal() {
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('signupModal').style.display = 'block';
+        setupAvatarSelection();
     }
 
-    function showLogin() {
-        document.getElementById('signupBox').style.display = 'none';
-        document.getElementById('loginBox').style.display = 'block';
+    function showLoginModal() {
+        document.getElementById('signupModal').style.display = 'none';
+        document.getElementById('loginModal').style.display = 'block';
     }
 
-    // Check if already logged in
-    function checkLogin() {
-        const current = localStorage.getItem("nexusplay_current");
-        if (current) {
-            let users = JSON.parse(localStorage.getItem("nexusplay_users") || "{}");
-            if (users[current]) {
-                showMainSection(current);
+    // ========== CHECK AUTO LOGIN ==========
+    function checkAutoLogin() {
+        const currentUser = localStorage.getItem('nexusplay_current');
+        if (currentUser) {
+            const users = JSON.parse(localStorage.getItem('nexusplay_users') || '{}');
+            if (users[currentUser]) {
+                showMainApp(currentUser, users[currentUser].avatar);
                 return;
             }
         }
-        document.getElementById('authSection').style.display = 'flex';
-        document.getElementById('mainSection').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'none';
+        document.getElementById('authOverlay').style.display = 'flex';
     }
 
-    checkLogin();
+    checkAutoLogin();
 </script>
 
 </body>
