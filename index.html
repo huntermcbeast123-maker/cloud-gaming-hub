@@ -247,8 +247,11 @@
         card.innerHTML = `
             <div class="game-icon">${game.icon}</div>
             <h3>${game.name}</h3>
-            <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>
-        `;
+            <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>const updates = [
+    { text: "🔥 Added 2 new games!", date: "April 16, 2026", badge: "NEW" },
+    // Add new updates here like this:
+    { text: "🎉 YOUR UPDATE HERE", date: "April 20, 2026", badge: "NEW" }
+];        `;
         grid.appendChild(card);
     });
 
