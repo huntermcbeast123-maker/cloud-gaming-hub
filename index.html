@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusPlay - Cyberpunk Cloud Gaming</title>
+    <title>NexusPlay - Cloud Gaming Library</title>
     <style>
         * {
             margin: 0;
@@ -12,72 +12,50 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Orbitron', 'Courier New', monospace;
-            transition: all 0.3s ease;
-            overflow-x: hidden;
-        }
-
-        body.dark {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
             background: #0a0a0f;
-            color: #00ffcc;
+            color: white;
         }
 
-        body.dark .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 10%, #0a0a2a, #05050a 90%);
-            z-index: -2;
-        }
-
-        body.light {
-            background: #f0f0f0;
-            color: #1a1a2a;
-        }
-
-        body.light .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 10%, #d0d0e0, #f0f0f0 80%);
-            z-index: -2;
-        }
-
+        /* Header */
         .header {
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(10, 10, 15, 0.95);
             backdrop-filter: blur(10px);
-            padding: 15px 40px;
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            border-bottom: 1px solid #00ffcc;
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 800;
-            font-family: 'Orbitron', monospace;
-            background: linear-gradient(135deg, #00ffcc, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
         }
 
-        .theme-toggle {
-            background: linear-gradient(135deg, #00ffcc, #ff00ff);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            color: #0a0a0f;
-            cursor: pointer;
-            font-weight: bold;
+        .logo span {
+            color: #6c5ce7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: white;
         }
 
         .user-info {
@@ -87,259 +65,214 @@
         }
 
         .avatar {
-            font-size: 30px;
-            filter: drop-shadow(0 0 5px #00ffcc);
+            font-size: 28px;
         }
 
         .logout-btn {
-            background: #ff00ff;
+            background: rgba(255,255,255,0.08);
             border: none;
-            padding: 5px 15px;
+            padding: 6px 14px;
             border-radius: 20px;
             color: white;
             cursor: pointer;
-            font-weight: bold;
+            font-size: 13px;
         }
 
+        /* Main Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 40px;
         }
 
+        /* Hero */
         .hero {
-            text-align: center;
-            margin: 40px 0;
+            margin: 50px 0 40px;
         }
 
         .hero h1 {
             font-size: 56px;
-            font-weight: 800;
-            font-family: 'Orbitron', monospace;
-            background: linear-gradient(135deg, #00ffcc, #ff00ff, #00ffcc);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
-            letter-spacing: 3px;
         }
 
         .hero p {
-            color: #888;
+            color: #666;
             font-size: 18px;
         }
 
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 30px 0;
-            justify-content: center;
+        /* Search */
+        .search-bar {
+            margin: 30px 0 40px;
         }
 
-        .search-box {
-            flex: 1;
-            max-width: 400px;
-            padding: 12px 20px;
-            border-radius: 30px;
-            border: 1px solid #00ffcc;
+        .search-bar input {
+            width: 100%;
+            max-width: 500px;
+            padding: 14px 20px;
             background: #1a1a2a;
-            color: #00ffcc;
+            border: 1px solid #2a2a3a;
+            border-radius: 40px;
+            color: white;
             font-size: 16px;
         }
 
-        .search-box:focus {
+        .search-bar input:focus {
             outline: none;
-            box-shadow: 0 0 15px #00ffcc;
+            border-color: #6c5ce7;
         }
 
-        .category-filter {
-            padding: 12px 20px;
-            border-radius: 30px;
-            border: 1px solid #00ffcc;
-            background: #1a1a2a;
-            color: #00ffcc;
-            cursor: pointer;
-        }
-
-        .favorites-toggle {
-            background: linear-gradient(135deg, #00ffcc, #ff00ff);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            color: #0a0a0f;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
+        /* Game Series Grid - Like Dribbble Design */
         .section-title {
-            font-size: 28px;
-            margin: 30px 0 20px;
-            font-family: 'Orbitron', monospace;
-            color: #00ffcc;
-            text-shadow: 0 0 5px #00ffcc;
-            letter-spacing: 2px;
-        }
-
-        .cloud-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .cloud-card {
-            background: rgba(26, 26, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            border: 1px solid #00ffcc;
-            transition: 0.3s;
-        }
-
-        .cloud-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
-            border-color: #ff00ff;
-        }
-
-        .cloud-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 5px #00ffcc);
-        }
-
-        .cloud-card h3 {
             font-size: 20px;
+            font-weight: 600;
+            margin: 40px 0 20px;
+            color: #ccc;
+        }
+
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .series-card {
+            background: #1a1a2a;
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #2a2a3a;
+        }
+
+        .series-card:hover {
+            transform: translateY(-4px);
+            border-color: #6c5ce7;
+            background: #1f1f32;
+        }
+
+        .series-card h3 {
+            font-size: 24px;
+            font-weight: 600;
             margin-bottom: 8px;
         }
 
-        .cloud-card p {
-            color: #888;
-            font-size: 13px;
-            margin-bottom: 15px;
-        }
-
-        .cloud-btn {
-            background: linear-gradient(135deg, #00ffcc, #ff00ff);
-            color: #0a0a0f;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
+        .series-card p {
+            color: #666;
             font-size: 14px;
-            font-weight: bold;
         }
 
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .game-card {
-            background: rgba(26, 26, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #00ffcc;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
-            border-color: #ff00ff;
-        }
-
-        .favorite-star {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        .game-logo {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin: 0 auto 15px;
-            display: block;
-            filter: drop-shadow(0 0 5px #00ffcc);
-        }
-
-        .game-card h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .game-category {
-            color: #ff00ff;
-            font-size: 12px;
-            display: block;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .play-btn {
-            background: linear-gradient(135deg, #00ffcc, #ff00ff);
-            color: #0a0a0f;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            text-decoration: none;
+        .game-count {
             display: inline-block;
+            margin-top: 12px;
             font-size: 13px;
-            font-weight: bold;
+            color: #6c5ce7;
         }
 
-        .updates-section {
-            background: rgba(26, 26, 42, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 30px 0;
-            border: 1px solid #00ffcc;
-        }
-
-        .update-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 12px 0;
-            border-bottom: 1px solid #00ffcc;
-        }
-
-        .update-badge {
-            padding: 4px 12px;
+        /* Game Detail Panel (Shows when a series is clicked) */
+        .detail-panel {
+            background: #1a1a2a;
             border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid #2a2a3a;
+            display: none;
         }
 
-        .badge-new { background: #ff00ff; color: white; }
-        .badge-update { background: #00ffcc; color: #0a0a0f; }
-        .badge-news { background: #ffa502; color: white; }
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a2a3a;
+        }
 
-        .update-text { flex: 1; }
-        .update-date { color: #666; font-size: 12px; }
+        .detail-header h2 {
+            font-size: 32px;
+            font-weight: 600;
+        }
 
+        .close-detail {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .game-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .game-item {
+            background: #12121f;
+            border-radius: 14px;
+            padding: 20px;
+            transition: 0.2s;
+        }
+
+        .game-item:hover {
+            background: #18182a;
+        }
+
+        .game-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .game-desc {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        /* Cloud Platforms Tags */
+        .cloud-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .cloud-tag {
+            background: rgba(108, 92, 231, 0.15);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #a29bfe;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .cloud-tag:hover {
+            background: #6c5ce7;
+            color: white;
+        }
+
+        /* Auth Modal */
         .auth-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.98);
+            background: rgba(0,0,0,0.95);
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -348,28 +281,31 @@
 
         .auth-box {
             background: #1a1a2a;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 40px;
             width: 100%;
             max-width: 400px;
             text-align: center;
-            border: 2px solid #00ffcc;
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+            border: 1px solid #2a2a3a;
         }
 
         .auth-box h2 {
             margin-bottom: 10px;
-            color: #00ffcc;
+        }
+
+        .auth-box p {
+            color: #888;
+            margin-bottom: 25px;
         }
 
         .auth-box input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             margin: 10px 0;
             background: #0a0a0f;
-            border: 1px solid #00ffcc;
-            border-radius: 10px;
-            color: #00ffcc;
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            color: white;
             font-size: 16px;
         }
 
@@ -383,62 +319,63 @@
         .avatar-choice {
             padding: 10px;
             background: #0a0a0f;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 30px;
-            border: 2px solid #00ffcc;
+            border: 2px solid transparent;
         }
 
         .avatar-choice.selected {
-            border-color: #ff00ff;
-            background: #1a1a2a;
-            box-shadow: 0 0 10px #ff00ff;
+            border-color: #6c5ce7;
+            background: #252540;
         }
 
         .auth-btn {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #00ffcc, #ff00ff);
+            padding: 14px;
+            background: #6c5ce7;
             border: none;
-            border-radius: 25px;
-            color: #0a0a0f;
+            border-radius: 40px;
+            color: white;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
         }
 
         .switch-link {
-            margin-top: 15px;
-            color: #00ffcc;
+            margin-top: 20px;
+            color: #6c5ce7;
             cursor: pointer;
         }
 
-        .main-app { display: none; }
+        .main-app {
+            display: none;
+        }
 
         footer {
             text-align: center;
-            padding: 30px;
-            color: #666;
-            border-top: 1px solid #00ffcc;
-            margin-top: 40px;
+            padding: 40px;
+            color: #444;
+            border-top: 1px solid #1a1a2a;
+            margin-top: 60px;
         }
 
         @media (max-width: 768px) {
-            .container { padding: 10px; }
-            .hero h1 { font-size: 32px; }
-            .header { padding: 10px 20px; }
-            .controls { flex-direction: column; align-items: center; }
-            .search-box { max-width: 100%; }
-            .game-logo { width: 60px; height: 60px; }
+            .container { padding: 20px; }
+            .hero h1 { font-size: 36px; }
+            .header { padding: 12px 20px; }
         }
     </style>
 </head>
-<body class="dark">
+<body>
 
-<div id="authScreen" class="auth-overlay">
+<div class="bg-gradient"></div>
+
+<!-- AUTH SECTION -->
+<div id="authOverlay" class="auth-overlay">
     <div class="auth-box" id="loginBox">
-        <h2>⚡ NEXUSPLAY</h2>
-        <p>Enter the cyberpunk gaming hub</p>
+        <h2>🎮 NexusPlay</h2>
+        <p>Sign in to browse cloud games</p>
         <input type="text" id="loginUsername" placeholder="Username">
         <button class="auth-btn" onclick="login()">Sign In</button>
         <div class="switch-link" onclick="showSignup()">✨ Create Free Account</div>
@@ -446,7 +383,7 @@
 
     <div class="auth-box" id="signupBox" style="display: none;">
         <h2>✨ Create Account</h2>
-        <p>Pick a username and avatar</p>
+        <p>Choose a username and avatar</p>
         <input type="text" id="signupUsername" placeholder="Username">
         <div class="avatar-options" id="avatarOptions">
             <div class="avatar-choice" data-avatar="😎">😎</div>
@@ -459,226 +396,219 @@
             <div class="avatar-choice" data-avatar="🔥">🔥</div>
         </div>
         <button class="auth-btn" onclick="signup()">Create Account</button>
-        <div class="switch-link" onclick="showLogin()">← Back to Sign In</div>
+        <div class="switch-link" onclick="showLogin()">← Back</div>
     </div>
 </div>
 
+<!-- MAIN APP -->
 <div id="mainApp" class="main-app">
     <div class="header">
-        <div class="logo">⚡ NEXUSPLAY</div>
-        <div style="display: flex; gap: 10px;">
-            <button class="theme-toggle" onclick="toggleTheme()">🌓 Dark/Light</button>
-            <div class="user-info">
-                <span class="avatar" id="userAvatar">😎</span>
-                <span id="userName">Gamer</span>
-                <button class="logout-btn" onclick="logout()">Sign Out</button>
-            </div>
+        <div class="logo">NEXUS<span>PLAY</span></div>
+        <div class="nav-links">
+            <a href="#">Browse</a>
+            <a href="#">Cloud Gaming</a>
+            <a href="#">Library</a>
+        </div>
+        <div class="user-info">
+            <span class="avatar" id="userAvatar">😎</span>
+            <span id="userName">Gamer</span>
+            <button class="logout-btn" onclick="logout()">Sign Out</button>
         </div>
     </div>
 
     <div class="container">
         <div class="hero">
-            <h1>⚡ CYBERPUNK CLOUD GAMING</h1>
-            <p>Play anywhere • No downloads • Neon speed • Instant access</p>
+            <h1>Cloud Gaming <span>Library</span></h1>
+            <p>Browse game series. See where you can play them.</p>
         </div>
 
-        <div class="section-title">☁️ CLOUD SERVICES</div>
-        <div class="cloud-grid" id="cloudGrid"></div>
-
-        <div class="controls">
-            <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search games..." onkeyup="filterGames()">
-            <select class="category-filter" id="categoryFilter" onchange="filterGames()">
-                <option value="all">All Categories</option>
-                <option value="Battle Royale">Battle Royale</option>
-                <option value="Shooter">Shooter</option>
-                <option value="Action">Action</option>
-                <option value="Sandbox">Sandbox</option>
-                <option value="Indie">Indie</option>
-                <option value="Sports">Sports</option>
-                <option value="Party">Party</option>
-                <option value="RPG">RPG</option>
-                <option value="Horror">Horror</option>
-                <option value="MOBA">MOBA</option>
-            </select>
-            <button class="favorites-toggle" onclick="toggleFavoritesView()">⭐ Show Favorites</button>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search game series..." onkeyup="filterSeries()">
         </div>
 
-        <div class="updates-section">
-            <div class="section-title" style="margin: 0 0 15px 0;">📢 LATEST NEWS</div>
-            <div id="updatesList"></div>
-        </div>
+        <div class="section-title">🎮 GAME SERIES</div>
+        <div class="series-grid" id="seriesGrid"></div>
 
-        <div class="section-title">🎮 GAME LIBRARY</div>
-        <div class="games-grid" id="gamesGrid"></div>
+        <!-- Detail Panel - Shows when a series is clicked -->
+        <div id="detailPanel" class="detail-panel">
+            <div class="detail-header">
+                <h2 id="detailTitle">Call of Duty</h2>
+                <button class="close-detail" onclick="closeDetail()">Close</button>
+            </div>
+            <div id="gameList" class="game-list"></div>
+        </div>
 
         <footer>
-            <p>NEXUSPLAY © 2026 • CYBERPUNK EDITION • ALL GAME LINKS ARE OFFICIAL</p>
+            <p>NexusPlay © 2026 • Find where to play your favorite games on cloud platforms</p>
         </footer>
     </div>
 </div>
 
 <script>
-    const cloudServices = [
-        { name: "GeForce NOW", icon: "☁️", description: "RTX Gaming in the Cloud", url: "https://play.geforcenow.com" },
-        { name: "Xbox Cloud Gaming", icon: "🎮", description: "Game Pass Ultimate", url: "https://www.xbox.com/play" },
-        { name: "Amazon Luna", icon: "🌙", description: "Amazon's Cloud Gaming", url: "https://luna.amazon.com" },
-        { name: "Boosteroid", icon: "🚀", description: "4K Cloud Gaming", url: "https://boosteroid.com" }
-    ];
-
-    // ========== GAMES WITH REAL LOGO URLs ==========
-    const allGames = [
-        { name: "Fortnite", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Fortnite_Logo.svg/1200px-Fortnite_Logo.svg.png", category: "Battle Royale", url: "https://www.fortnite.com/play" },
-        { name: "Call of Duty", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Call_of_Duty_Logo.svg/1200px-Call_of_Duty_Logo.svg.png", category: "Shooter", url: "https://www.callofduty.com/warzone" },
-        { name: "GTA V", logo: "https://upload.wikimedia.org/wikipedia/en/a/a6/Grand_Theft_Auto_V_cover_art.jpg", category: "Action", url: "https://www.rockstargames.com/gta-v" },
-        { name: "Minecraft", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Minecraft_cover.png/1200px-Minecraft_cover.png", category: "Sandbox", url: "https://www.minecraft.net" },
-        { name: "Valorant", logo: "https://upload.wikimedia.org/wikipedia/en/0/04/Valorant_2024_logo.png", category: "Shooter", url: "https://playvalorant.com" },
-        { name: "Apex Legends", logo: "https://upload.wikimedia.org/wikipedia/en/9/9d/Apex_Legends_logo.png", category: "Battle Royale", url: "https://www.ea.com/games/apex-legends" },
-        { name: "Rocket League", logo: "https://upload.wikimedia.org/wikipedia/en/4/4a/Rocket_League_coverart.jpg", category: "Sports", url: "https://www.rocketleague.com" },
-        { name: "PUBG", logo: "https://upload.wikimedia.org/wikipedia/en/4/42/PUBG_Logo.png", category: "Battle Royale", url: "https://pubg.com" },
-        { name: "Overwatch 2", logo: "https://upload.wikimedia.org/wikipedia/en/9/9f/Overwatch_2_logo.png", category: "Shooter", url: "https://overwatch.blizzard.com" },
-        { name: "League of Legends", logo: "https://upload.wikimedia.org/wikipedia/en/6/6e/League_of_Legends_2024_logo.svg.png", category: "MOBA", url: "https://leagueoflegends.com" },
-        { name: "Roblox", logo: "https://upload.wikimedia.org/wikipedia/en/4/4a/Roblox_Logo_2022.svg.png", category: "Sandbox", url: "https://roblox.com" },
-        { name: "Among Us", logo: "https://upload.wikimedia.org/wikipedia/en/9/9b/Among_Us_cover_art.jpg", category: "Party", url: "https://innersloth.com/games/among-us" },
-        { name: "Counter-Strike 2", logo: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Counter-Strike_2_logo.png", category: "Shooter", url: "https://counter-strike.net" },
-        { name: "Genshin Impact", logo: "https://upload.wikimedia.org/wikipedia/en/5/5a/Genshin_Impact_logo.svg.png", category: "RPG", url: "https://genshin.hoyoverse.com" },
-        { name: "Elden Ring", logo: "https://upload.wikimedia.org/wikipedia/en/a/a3/Elden_Ring_cover_art.jpg", category: "RPG", url: "https://en.bandainamcoent.eu/elden-ring" },
-        { name: "God of War", logo: "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_2018_cover.jpg", category: "Action", url: "https://www.playstation.com/games/god-of-war/" }
-    ];
-
-    const updates = [
-        { text: "🔥 CYBERPUNK THEME LAUNCHED!", date: "April 19, 2026", type: "new" },
-        { text: "🔥 REAL GAME LOGOS ADDED!", date: "April 19, 2026", type: "new" },
-        { text: "16+ games now available on NexusPlay!", date: "April 19, 2026", type: "new" },
-        { text: "GeForce NOW added to cloud services!", date: "April 17, 2026", type: "new" },
-        { text: "Fortnite Chapter 5 Season 3 is live!", date: "April 15, 2026", type: "update" }
+    // ========== GAME SERIES DATA ==========
+    // Each series has multiple games, each game has cloud platforms you can play it on
+    const gameSeries = [
+        {
+            name: "Call of Duty",
+            count: 14,
+            games: [
+                { name: "Call of Duty: Modern Warfare III", desc: "Iconic characters return in this blockbuster FPS", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Call of Duty: Warzone", desc: "Free-to-play battle royale", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Call of Duty: Black Ops Cold War", desc: "Classic Black Ops gameplay", platforms: ["GeForce NOW", "Xbox Cloud Gaming"] },
+                { name: "Call of Duty: Vanguard", desc: "WWII action", platforms: ["GeForce NOW", "Xbox Cloud Gaming"] }
+            ]
+        },
+        {
+            name: "Metro",
+            count: 3,
+            games: [
+                { name: "Metro Exodus", desc: "Post-apocalyptic FPS with stunning environments", platforms: ["GeForce NOW", "Boosteroid"] },
+                { name: "Metro Last Light", desc: "Continue Artyom's journey in the Moscow metro", platforms: ["GeForce NOW", "Boosteroid"] },
+                { name: "Metro 2033", desc: "The classic survival horror FPS", platforms: ["GeForce NOW", "Boosteroid"] }
+            ]
+        },
+        {
+            name: "Assassin's Creed",
+            count: 16,
+            games: [
+                { name: "Assassin's Creed Mirage", desc: "Stealth-focused return to roots", platforms: ["GeForce NOW", "Boosteroid"] },
+                { name: "Assassin's Creed Valhalla", desc: "Epic Viking adventure", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Assassin's Creed Odyssey", desc: "Ancient Greek open-world RPG", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Assassin's Creed Origins", desc: "The birth of the Brotherhood", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] }
+            ]
+        },
+        {
+            name: "Crysis",
+            count: 3,
+            games: [
+                { name: "Crysis Remastered", desc: "The legendary FPS remastered", platforms: ["GeForce NOW", "Boosteroid"] },
+                { name: "Crysis 2 Remastered", desc: "Battle through New York", platforms: ["GeForce NOW", "Boosteroid"] },
+                { name: "Crysis 3 Remastered", desc: "The ultimate Nanosuit experience", platforms: ["GeForce NOW", "Boosteroid"] }
+            ]
+        },
+        {
+            name: "Far Cry",
+            count: 8,
+            games: [
+                { name: "Far Cry 6", desc: "Revolutionary open-world FPS", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Far Cry 5", desc: "Cult-infested Montana", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Far Cry New Dawn", desc: "Post-apocalyptic Hope County", platforms: ["GeForce NOW", "Xbox Cloud Gaming"] }
+            ]
+        },
+        {
+            name: "Tom Clancy's Rainbow Six",
+            count: 5,
+            games: [
+                { name: "Rainbow Six Siege", desc: "Tactical competitive FPS", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Rainbow Six Extraction", desc: "Co-op alien containment", platforms: ["GeForce NOW", "Xbox Cloud Gaming"] }
+            ]
+        },
+        {
+            name: "The Witcher",
+            count: 3,
+            games: [
+                { name: "The Witcher 3: Wild Hunt", desc: "Masterpiece open-world RPG", platforms: ["GeForce NOW", "Boosteroid"] },
+                { name: "The Witcher 2", desc: "Political intrigue and monsters", platforms: ["GeForce NOW"] }
+            ]
+        },
+        {
+            name: "Battlefield",
+            count: 7,
+            games: [
+                { name: "Battlefield 2042", desc: "All-out warfare near future", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Battlefield V", desc: "WWII epic", platforms: ["GeForce NOW", "Xbox Cloud Gaming", "Boosteroid"] },
+                { name: "Battlefield 1", desc: "WWI immersive action", platforms: ["GeForce NOW", "Xbox Cloud Gaming"] }
+            ]
+        }
     ];
 
     let selectedAvatar = "😎";
-    let favorites = JSON.parse(localStorage.getItem('nexusplay_favorites') || '[]');
-    let showFavoritesOnly = false;
+    let currentSeries = null;
 
-    function toggleTheme() {
-        if (document.body.classList.contains('dark')) {
-            document.body.classList.remove('dark');
-            document.body.classList.add('light');
-            localStorage.setItem('nexusplay_theme', 'light');
-        } else {
-            document.body.classList.remove('light');
-            document.body.classList.add('dark');
-            localStorage.setItem('nexusplay_theme', 'dark');
-        }
-    }
-
-    function loadTheme() {
-        const savedTheme = localStorage.getItem('nexusplay_theme');
-        if (savedTheme === 'light') {
-            document.body.classList.remove('dark');
-            document.body.classList.add('light');
-        } else {
-            document.body.classList.remove('light');
-            document.body.classList.add('dark');
-        }
-    }
-
-    function toggleFavorite(gameName) {
-        if (favorites.includes(gameName)) {
-            favorites = favorites.filter(f => f !== gameName);
-        } else {
-            favorites.push(gameName);
-        }
-        localStorage.setItem('nexusplay_favorites', JSON.stringify(favorites));
-        filterGames();
-    }
-
-    function toggleFavoritesView() {
-        showFavoritesOnly = !showFavoritesOnly;
-        const btn = document.querySelector('.favorites-toggle');
-        if (btn) {
-            btn.textContent = showFavoritesOnly ? '⭐ Show All Games' : '⭐ Show Favorites';
-        }
-        filterGames();
-    }
-
-    function filterGames() {
-        const searchTerm = document.getElementById('searchBox').value.toLowerCase();
-        const category = document.getElementById('categoryFilter').value;
-        
-        let filtered = allGames;
-        
-        if (showFavoritesOnly) {
-            filtered = filtered.filter(game => favorites.includes(game.name));
-        }
-        
-        if (searchTerm) {
-            filtered = filtered.filter(game => game.name.toLowerCase().includes(searchTerm));
-        }
-        
-        if (category !== 'all') {
-            filtered = filtered.filter(game => game.category === category);
-        }
-        
-        renderGames(filtered);
-    }
-
-    function renderCloudServices() {
-        const container = document.getElementById('cloudGrid');
+    // Render series grid
+    function renderSeries() {
+        const container = document.getElementById('seriesGrid');
         if (!container) return;
+        
+        const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+        const filtered = gameSeries.filter(series => 
+            series.name.toLowerCase().includes(searchTerm)
+        );
+        
         container.innerHTML = '';
-        cloudServices.forEach(service => {
-            container.innerHTML += `
-                <div class="cloud-card">
-                    <div class="cloud-icon">${service.icon}</div>
-                    <h3>${service.name}</h3>
-                    <p>${service.description}</p>
-                    <a href="${service.url}" target="_blank" class="cloud-btn">Launch →</a>
-                </div>
+        filtered.forEach(series => {
+            const card = document.createElement('div');
+            card.className = 'series-card';
+            card.onclick = () => showSeriesDetail(series);
+            card.innerHTML = `
+                <h3>${series.name}</h3>
+                <p>${series.count} games of series</p>
+                <span class="game-count">▶ Click to view</span>
             `;
-        });
-    }
-
-    function renderGames(gamesToRender) {
-        const container = document.getElementById('gamesGrid');
-        if (!container) return;
-        container.innerHTML = '';
-        gamesToRender.forEach(game => {
-            const isFavorite = favorites.includes(game.name);
-            container.innerHTML += `
-                <div class="game-card">
-                    <button class="favorite-star" onclick="toggleFavorite('${game.name.replace(/'/g, "\\'")}')">${isFavorite ? '⭐' : '☆'}</button>
-                    <img class="game-logo" src="${game.logo}" alt="${game.name} logo" onerror="this.src='https://via.placeholder.com/80?text=${game.name.charAt(0)}'">
-                    <h3>${game.name}</h3>
-                    <span class="game-category">${game.category}</span>
-                    <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>
-                </div>
-            `;
+            container.appendChild(card);
         });
         
-        if (gamesToRender.length === 0) {
-            container.innerHTML = '<p style="text-align:center; color:#888; grid-column:1/-1;">No games found. Try a different search!</p>';
+        if (filtered.length === 0) {
+            container.innerHTML = '<p style="color:#666; text-align:center; grid-column:1/-1;">No series found</p>';
         }
     }
 
-    function renderUpdates() {
-        const container = document.getElementById('updatesList');
-        if (!container) return;
-        container.innerHTML = '';
-        updates.forEach(update => {
-            let badgeClass = '';
-            let badgeText = '';
-            if (update.type === 'new') { badgeClass = 'badge-new'; badgeText = 'NEW'; }
-            else if (update.type === 'update') { badgeClass = 'badge-update'; badgeText = 'UPDATE'; }
-            else { badgeClass = 'badge-news'; badgeText = 'NEWS'; }
+    // Show detail panel for a series
+    function showSeriesDetail(series) {
+        currentSeries = series;
+        document.getElementById('detailTitle').innerText = series.name;
+        
+        const gameListContainer = document.getElementById('gameList');
+        gameListContainer.innerHTML = '';
+        
+        series.games.forEach(game => {
+            const gameItem = document.createElement('div');
+            gameItem.className = 'game-item';
             
-            container.innerHTML += `
-                <div class="update-item">
-                    <div class="update-badge ${badgeClass}">${badgeText}</div>
-                    <div class="update-text">${update.text}</div>
-                    <div class="update-date">${update.date}</div>
-                </div>
+            // Create platform tags
+            let platformTags = '';
+            game.platforms.forEach(platform => {
+                let platformUrl = '#';
+                if (platform === 'GeForce NOW') platformUrl = 'https://play.geforcenow.com';
+                else if (platform === 'Xbox Cloud Gaming') platformUrl = 'https://www.xbox.com/play';
+                else if (platform === 'Boosteroid') platformUrl = 'https://boosteroid.com';
+                else if (platform === 'Amazon Luna') platformUrl = 'https://luna.amazon.com';
+                
+                platformTags += `<a href="${platformUrl}" target="_blank" class="cloud-tag">${platform} →</a>`;
+            });
+            
+            gameItem.innerHTML = `
+                <div class="game-name">${game.name}</div>
+                <div class="game-desc">${game.desc}</div>
+                <div class="cloud-tags">${platformTags}</div>
             `;
+            gameListContainer.appendChild(gameItem);
         });
+        
+        document.getElementById('detailPanel').style.display = 'block';
+        document.getElementById('detailPanel').scrollIntoView({ behavior: 'smooth' });
     }
 
+    function closeDetail() {
+        document.getElementById('detailPanel').style.display = 'none';
+        currentSeries = null;
+    }
+
+    function filterSeries() {
+        renderSeries();
+        if (currentSeries) {
+            // Check if current series still exists in filtered results
+            const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+            const stillVisible = gameSeries.some(s => 
+                s.name === currentSeries.name && s.name.toLowerCase().includes(searchTerm)
+            );
+            if (!stillVisible) {
+                closeDetail();
+            }
+        }
+    }
+
+    // ========== AUTH FUNCTIONS ==========
     function setupAvatarSelection() {
         document.querySelectorAll('.avatar-choice').forEach(opt => {
             opt.addEventListener('click', function() {
@@ -696,33 +626,28 @@
             alert("Please enter a username!");
             return;
         }
-        
         let users = JSON.parse(localStorage.getItem('nexusplay_users') || '{}');
         if (users[username]) {
-            alert("Username already taken!");
+            alert("Username taken!");
             return;
         }
-        
         users[username] = { avatar: selectedAvatar };
         localStorage.setItem('nexusplay_users', JSON.stringify(users));
         localStorage.setItem('nexusplay_current', username);
-        
         showMainApp(username, selectedAvatar);
     }
 
     function login() {
         const username = document.getElementById('loginUsername').value.trim();
         if (!username) {
-            alert("Please enter your username!");
+            alert("Enter username!");
             return;
         }
-        
         let users = JSON.parse(localStorage.getItem('nexusplay_users') || '{}');
         if (!users[username]) {
-            alert("Username not found! Create an account first.");
+            alert("User not found! Create account.");
             return;
         }
-        
         localStorage.setItem('nexusplay_current', username);
         showMainApp(username, users[username].avatar);
     }
@@ -730,20 +655,15 @@
     function logout() {
         localStorage.removeItem('nexusplay_current');
         document.getElementById('mainApp').style.display = 'none';
-        document.getElementById('authScreen').style.display = 'flex';
-        document.getElementById('loginUsername').value = '';
-        document.getElementById('signupUsername').value = '';
+        document.getElementById('authOverlay').style.display = 'flex';
     }
 
     function showMainApp(username, avatar) {
-        document.getElementById('authScreen').style.display = 'none';
+        document.getElementById('authOverlay').style.display = 'none';
         document.getElementById('mainApp').style.display = 'block';
         document.getElementById('userName').innerText = username;
         document.getElementById('userAvatar').innerText = avatar;
-        renderCloudServices();
-        renderGames(allGames);
-        renderUpdates();
-        loadTheme();
+        renderSeries();
     }
 
     function showSignup() {
@@ -757,6 +677,7 @@
         document.getElementById('loginBox').style.display = 'block';
     }
 
+    // Check auto login
     const savedUser = localStorage.getItem('nexusplay_current');
     if (savedUser) {
         const users = JSON.parse(localStorage.getItem('nexusplay_users') || '{}');
@@ -764,11 +685,11 @@
             showMainApp(savedUser, users[savedUser].avatar);
         } else {
             document.getElementById('mainApp').style.display = 'none';
-            document.getElementById('authScreen').style.display = 'flex';
+            document.getElementById('authOverlay').style.display = 'flex';
         }
     } else {
         document.getElementById('mainApp').style.display = 'none';
-        document.getElementById('authScreen').style.display = 'flex';
+        document.getElementById('authOverlay').style.display = 'flex';
     }
 </script>
 
