@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-site-verification" content="jII3qQpJ9Uk3__ZEqN0PRaRP49kJYr0ocwewTg7t9XU" />    <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusPlay - Cyberpunk Cloud Gaming</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Themes */
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', 'Orbitron', 'Courier New', monospace;
             transition: all 0.3s ease;
+            overflow-x: hidden;
         }
 
         body.dark {
             background: #0a0a0f;
-            color: white;
-        }
-
-        body.light {
-            background: #f0f0f0;
-            color: #1a1a2a;
+            color: #00ffcc;
         }
 
         body.dark .bg-gradient {
@@ -30,8 +28,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 10%, #1a1a3e, #0a0a0f 80%);
+            background: radial-gradient(circle at 30% 10%, #0a0a2a, #05050a 90%);
             z-index: -2;
+        }
+
+        body.light {
+            background: #f0f0f0;
+            color: #1a1a2a;
         }
 
         body.light .bg-gradient {
@@ -44,36 +47,37 @@
             z-index: -2;
         }
 
-        /* Header */
         .header {
-            background: rgba(0,0,0,0.9);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
             padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            border-bottom: 1px solid #333;
-        }
-
-        body.light .header {
-            background: rgba(255,255,255,0.9);
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #00ffcc;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #6c5ce7;
+            font-size: 28px;
+            font-weight: 800;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
 
         .theme-toggle {
-            background: #6c5ce7;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff);
             border: none;
             padding: 8px 15px;
             border-radius: 20px;
-            color: white;
+            color: #0a0a0f;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .user-info {
@@ -84,43 +88,46 @@
 
         .avatar {
             font-size: 30px;
+            filter: drop-shadow(0 0 5px #00ffcc);
         }
 
         .logout-btn {
-            background: #ff4757;
+            background: #ff00ff;
             border: none;
             padding: 5px 15px;
             border-radius: 20px;
             color: white;
             cursor: pointer;
+            font-weight: bold;
         }
 
-        /* Main Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Hero */
         .hero {
             text-align: center;
             margin: 40px 0;
         }
 
         .hero h1 {
-            font-size: 48px;
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            font-size: 56px;
+            font-weight: 800;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff, #00ffcc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+            letter-spacing: 3px;
         }
 
         .hero p {
             color: #888;
-            margin-top: 10px;
+            font-size: 18px;
         }
 
-        /* Search and Filters */
         .controls {
             display: flex;
             flex-wrap: wrap;
@@ -134,49 +141,45 @@
             max-width: 400px;
             padding: 12px 20px;
             border-radius: 30px;
-            border: 1px solid #333;
+            border: 1px solid #00ffcc;
             background: #1a1a2a;
-            color: white;
+            color: #00ffcc;
             font-size: 16px;
         }
 
-        body.light .search-box {
-            background: white;
-            border: 1px solid #ddd;
-            color: #333;
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 0 15px #00ffcc;
         }
 
         .category-filter {
             padding: 12px 20px;
             border-radius: 30px;
-            border: 1px solid #333;
+            border: 1px solid #00ffcc;
             background: #1a1a2a;
-            color: white;
+            color: #00ffcc;
             cursor: pointer;
-        }
-
-        body.light .category-filter {
-            background: white;
-            border: 1px solid #ddd;
-            color: #333;
         }
 
         .favorites-toggle {
-            background: #6c5ce7;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff);
             border: none;
             padding: 12px 25px;
             border-radius: 30px;
-            color: white;
+            color: #0a0a0f;
             cursor: pointer;
+            font-weight: bold;
         }
 
-        /* Section Titles */
         .section-title {
-            font-size: 24px;
+            font-size: 28px;
             margin: 30px 0 20px;
+            font-family: 'Orbitron', monospace;
+            color: #00ffcc;
+            text-shadow: 0 0 5px #00ffcc;
+            letter-spacing: 2px;
         }
 
-        /* Cloud Gaming Cards */
         .cloud-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -185,27 +188,25 @@
         }
 
         .cloud-card {
-            background: #1a1a2a;
+            background: rgba(26, 26, 42, 0.8);
+            backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 25px;
             text-align: center;
-            border: 1px solid #333;
+            border: 1px solid #00ffcc;
             transition: 0.3s;
         }
 
-        body.light .cloud-card {
-            background: white;
-            border: 1px solid #ddd;
-        }
-
         .cloud-card:hover {
-            transform: translateY(-5px);
-            border-color: #6c5ce7;
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
+            border-color: #ff00ff;
         }
 
         .cloud-icon {
             font-size: 50px;
             margin-bottom: 15px;
+            filter: drop-shadow(0 0 5px #00ffcc);
         }
 
         .cloud-card h3 {
@@ -220,8 +221,8 @@
         }
 
         .cloud-btn {
-            background: #6c5ce7;
-            color: white;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff);
+            color: #0a0a0f;
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
@@ -229,9 +230,9 @@
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
+            font-weight: bold;
         }
 
-        /* Games Grid */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -240,23 +241,20 @@
         }
 
         .game-card {
-            background: #1a1a2a;
+            background: rgba(26, 26, 42, 0.8);
+            backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
-            border: 1px solid #333;
+            border: 1px solid #00ffcc;
             transition: 0.3s;
             position: relative;
         }
 
-        body.light .game-card {
-            background: white;
-            border: 1px solid #ddd;
-        }
-
         .game-card:hover {
             transform: translateY(-5px);
-            border-color: #6c5ce7;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+            border-color: #ff00ff;
         }
 
         .favorite-star {
@@ -269,13 +267,13 @@
             border: none;
         }
 
-        .favorite-star:hover {
-            transform: scale(1.1);
-        }
-
-        .game-icon {
-            font-size: 50px;
-            margin-bottom: 10px;
+        .game-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin: 0 auto 15px;
+            display: block;
+            filter: drop-shadow(0 0 5px #00ffcc);
         }
 
         .game-card h3 {
@@ -284,15 +282,16 @@
         }
 
         .game-category {
-            color: #6c5ce7;
+            color: #ff00ff;
             font-size: 12px;
             display: block;
             margin-bottom: 15px;
+            font-weight: bold;
         }
 
         .play-btn {
-            background: #6c5ce7;
-            color: white;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff);
+            color: #0a0a0f;
             border: none;
             padding: 8px 20px;
             border-radius: 25px;
@@ -300,19 +299,16 @@
             text-decoration: none;
             display: inline-block;
             font-size: 13px;
+            font-weight: bold;
         }
 
-        /* Updates Section */
         .updates-section {
-            background: #1a1a2a;
+            background: rgba(26, 26, 42, 0.6);
+            backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
             margin: 30px 0;
-        }
-
-        body.light .updates-section {
-            background: white;
-            border: 1px solid #ddd;
+            border: 1px solid #00ffcc;
         }
 
         .update-item {
@@ -320,11 +316,7 @@
             align-items: center;
             gap: 15px;
             padding: 12px 0;
-            border-bottom: 1px solid #333;
-        }
-
-        body.light .update-item {
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #00ffcc;
         }
 
         .update-badge {
@@ -334,27 +326,20 @@
             font-weight: bold;
         }
 
-        .badge-new { background: #ff4757; }
-        .badge-update { background: #6c5ce7; }
-        .badge-news { background: #ffa502; }
+        .badge-new { background: #ff00ff; color: white; }
+        .badge-update { background: #00ffcc; color: #0a0a0f; }
+        .badge-news { background: #ffa502; color: white; }
 
-        .update-text {
-            flex: 1;
-        }
+        .update-text { flex: 1; }
+        .update-date { color: #666; font-size: 12px; }
 
-        .update-date {
-            color: #666;
-            font-size: 12px;
-        }
-
-        /* Auth Modal */
         .auth-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.98);
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -368,26 +353,23 @@
             width: 100%;
             max-width: 400px;
             text-align: center;
-            border: 1px solid #333;
+            border: 2px solid #00ffcc;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
         }
 
         .auth-box h2 {
             margin-bottom: 10px;
-        }
-
-        .auth-box p {
-            color: #888;
-            margin-bottom: 20px;
+            color: #00ffcc;
         }
 
         .auth-box input {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            background: #252540;
-            border: 1px solid #333;
+            background: #0a0a0f;
+            border: 1px solid #00ffcc;
             border-radius: 10px;
-            color: white;
+            color: #00ffcc;
             font-size: 16px;
         }
 
@@ -400,45 +382,44 @@
 
         .avatar-choice {
             padding: 10px;
-            background: #252540;
+            background: #0a0a0f;
             border-radius: 10px;
             cursor: pointer;
             font-size: 30px;
-            border: 2px solid transparent;
+            border: 2px solid #00ffcc;
         }
 
         .avatar-choice.selected {
-            border-color: #6c5ce7;
-            background: #353560;
+            border-color: #ff00ff;
+            background: #1a1a2a;
+            box-shadow: 0 0 10px #ff00ff;
         }
 
         .auth-btn {
             width: 100%;
             padding: 12px;
-            background: #6c5ce7;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff);
             border: none;
             border-radius: 25px;
-            color: white;
+            color: #0a0a0f;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
         }
 
         .switch-link {
             margin-top: 15px;
-            color: #6c5ce7;
+            color: #00ffcc;
             cursor: pointer;
         }
 
-        .main-app {
-            display: none;
-        }
+        .main-app { display: none; }
 
         footer {
             text-align: center;
             padding: 30px;
             color: #666;
-            border-top: 1px solid #333;
+            border-top: 1px solid #00ffcc;
             margin-top: 40px;
         }
 
@@ -448,16 +429,16 @@
             .header { padding: 10px 20px; }
             .controls { flex-direction: column; align-items: center; }
             .search-box { max-width: 100%; }
+            .game-logo { width: 60px; height: 60px; }
         }
     </style>
 </head>
 <body class="dark">
 
-<!-- SIGN IN / SIGN UP SCREEN -->
 <div id="authScreen" class="auth-overlay">
     <div class="auth-box" id="loginBox">
-        <h2>🎮 NexusPlay</h2>
-        <p>Sign in to start cloud gaming</p>
+        <h2>⚡ NEXUSPLAY</h2>
+        <p>Enter the cyberpunk gaming hub</p>
         <input type="text" id="loginUsername" placeholder="Username">
         <button class="auth-btn" onclick="login()">Sign In</button>
         <div class="switch-link" onclick="showSignup()">✨ Create Free Account</div>
@@ -482,7 +463,6 @@
     </div>
 </div>
 
-<!-- MAIN APP -->
 <div id="mainApp" class="main-app">
     <div class="header">
         <div class="logo">⚡ NEXUSPLAY</div>
@@ -498,15 +478,13 @@
 
     <div class="container">
         <div class="hero">
-            <h1>Next-Gen Cloud Gaming</h1>
-            <p>Play anywhere • No downloads • Instant access</p>
+            <h1>⚡ CYBERPUNK CLOUD GAMING</h1>
+            <p>Play anywhere • No downloads • Neon speed • Instant access</p>
         </div>
 
-        <!-- Cloud Gaming Services -->
-        <div class="section-title">☁️ Cloud Gaming Services</div>
+        <div class="section-title">☁️ CLOUD SERVICES</div>
         <div class="cloud-grid" id="cloudGrid"></div>
 
-        <!-- Search and Filters -->
         <div class="controls">
             <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search games..." onkeyup="filterGames()">
             <select class="category-filter" id="categoryFilter" onchange="filterGames()">
@@ -518,28 +496,28 @@
                 <option value="Indie">Indie</option>
                 <option value="Sports">Sports</option>
                 <option value="Party">Party</option>
+                <option value="RPG">RPG</option>
+                <option value="Horror">Horror</option>
+                <option value="MOBA">MOBA</option>
             </select>
             <button class="favorites-toggle" onclick="toggleFavoritesView()">⭐ Show Favorites</button>
         </div>
 
-        <!-- News Updates -->
         <div class="updates-section">
-            <div class="section-title" style="margin: 0 0 15px 0;">📢 Latest News</div>
+            <div class="section-title" style="margin: 0 0 15px 0;">📢 LATEST NEWS</div>
             <div id="updatesList"></div>
         </div>
 
-        <!-- Games Grid -->
-        <div class="section-title">🎮 Popular Games</div>
+        <div class="section-title">🎮 GAME LIBRARY</div>
         <div class="games-grid" id="gamesGrid"></div>
 
         <footer>
-            <p>NexusPlay © 2026 • All game links are official</p>
+            <p>NEXUSPLAY © 2026 • CYBERPUNK EDITION • ALL GAME LINKS ARE OFFICIAL</p>
         </footer>
     </div>
 </div>
 
 <script>
-    // ========== CLOUD GAMING SERVICES ==========
     const cloudServices = [
         { name: "GeForce NOW", icon: "☁️", description: "RTX Gaming in the Cloud", url: "https://play.geforcenow.com" },
         { name: "Xbox Cloud Gaming", icon: "🎮", description: "Game Pass Ultimate", url: "https://www.xbox.com/play" },
@@ -547,45 +525,38 @@
         { name: "Boosteroid", icon: "🚀", description: "4K Cloud Gaming", url: "https://boosteroid.com" }
     ];
 
-    // ========== GAMES (MORE GAMES ADDED) ==========
+    // ========== GAMES WITH REAL LOGO URLs ==========
     const allGames = [
-        { name: "Fortnite", icon: "🔫", category: "Battle Royale", url: "https://www.fortnite.com/play" },
-        { name: "Call of Duty", icon: "🎯", category: "Shooter", url: "https://www.callofduty.com/warzone" },
-        { name: "GTA V", icon: "🚗", category: "Action", url: "https://www.rockstargames.com/gta-v" },
-        { name: "Minecraft", icon: "⛏️", category: "Sandbox", url: "https://www.minecraft.net" },
-        { name: "Valorant", icon: "🎯", category: "Shooter", url: "https://playvalorant.com" },
-        { name: "Apex Legends", icon: "🏆", category: "Battle Royale", url: "https://www.ea.com/games/apex-legends" },
-        { name: "Rocket League", icon: "🚀", category: "Sports", url: "https://www.rocketleague.com" },
-        { name: "We Become What We Behold", icon: "📸", category: "Indie", url: "https://ncase.itch.io/wbwwb" },
-        { name: "PUBG", icon: "🔫", category: "Battle Royale", url: "https://pubg.com" },
-        { name: "Overwatch 2", icon: "🎯", category: "Shooter", url: "https://overwatch.blizzard.com" },
-        { name: "League of Legends", icon: "⚔️", category: "MOBA", url: "https://leagueoflegends.com" },
-        { name: "Roblox", icon: "🧸", category: "Sandbox", url: "https://roblox.com" },
-        { name: "Fall Guys", icon: "🫘", category: "Party", url: "https://fallguys.com" },
-        { name: "Among Us", icon: "👾", category: "Party", url: "https://innersloth.com/games/among-us" },
-        { name: "CS:GO", icon: "🔫", category: "Shooter", url: "https://counter-strike.net" },
-        { name: "Destiny 2", icon: "🌌", category: "Shooter", url: "https://bungie.net/destiny" },
-        { name: "Rainbow Six Siege", icon: "🎯", category: "Shooter", url: "https://rainbow6.ubisoft.com" },
-        { name: "Dead by Daylight", icon: "🔪", category: "Horror", url: "https://deadbydaylight.com" },
-        { name: "Genshin Impact", icon: "🗡️", category: "RPG", url: "https://genshin.hoyoverse.com" },
-        { name: "Halo Infinite", icon: "🪖", category: "Shooter", url: "https://halowaypoint.com" }
+        { name: "Fortnite", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Fortnite_Logo.svg/1200px-Fortnite_Logo.svg.png", category: "Battle Royale", url: "https://www.fortnite.com/play" },
+        { name: "Call of Duty", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Call_of_Duty_Logo.svg/1200px-Call_of_Duty_Logo.svg.png", category: "Shooter", url: "https://www.callofduty.com/warzone" },
+        { name: "GTA V", logo: "https://upload.wikimedia.org/wikipedia/en/a/a6/Grand_Theft_Auto_V_cover_art.jpg", category: "Action", url: "https://www.rockstargames.com/gta-v" },
+        { name: "Minecraft", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Minecraft_cover.png/1200px-Minecraft_cover.png", category: "Sandbox", url: "https://www.minecraft.net" },
+        { name: "Valorant", logo: "https://upload.wikimedia.org/wikipedia/en/0/04/Valorant_2024_logo.png", category: "Shooter", url: "https://playvalorant.com" },
+        { name: "Apex Legends", logo: "https://upload.wikimedia.org/wikipedia/en/9/9d/Apex_Legends_logo.png", category: "Battle Royale", url: "https://www.ea.com/games/apex-legends" },
+        { name: "Rocket League", logo: "https://upload.wikimedia.org/wikipedia/en/4/4a/Rocket_League_coverart.jpg", category: "Sports", url: "https://www.rocketleague.com" },
+        { name: "PUBG", logo: "https://upload.wikimedia.org/wikipedia/en/4/42/PUBG_Logo.png", category: "Battle Royale", url: "https://pubg.com" },
+        { name: "Overwatch 2", logo: "https://upload.wikimedia.org/wikipedia/en/9/9f/Overwatch_2_logo.png", category: "Shooter", url: "https://overwatch.blizzard.com" },
+        { name: "League of Legends", logo: "https://upload.wikimedia.org/wikipedia/en/6/6e/League_of_Legends_2024_logo.svg.png", category: "MOBA", url: "https://leagueoflegends.com" },
+        { name: "Roblox", logo: "https://upload.wikimedia.org/wikipedia/en/4/4a/Roblox_Logo_2022.svg.png", category: "Sandbox", url: "https://roblox.com" },
+        { name: "Among Us", logo: "https://upload.wikimedia.org/wikipedia/en/9/9b/Among_Us_cover_art.jpg", category: "Party", url: "https://innersloth.com/games/among-us" },
+        { name: "Counter-Strike 2", logo: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Counter-Strike_2_logo.png", category: "Shooter", url: "https://counter-strike.net" },
+        { name: "Genshin Impact", logo: "https://upload.wikimedia.org/wikipedia/en/5/5a/Genshin_Impact_logo.svg.png", category: "RPG", url: "https://genshin.hoyoverse.com" },
+        { name: "Elden Ring", logo: "https://upload.wikimedia.org/wikipedia/en/a/a3/Elden_Ring_cover_art.jpg", category: "RPG", url: "https://en.bandainamcoent.eu/elden-ring" },
+        { name: "God of War", logo: "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_2018_cover.jpg", category: "Action", url: "https://www.playstation.com/games/god-of-war/" }
     ];
 
-    // ========== UPDATES ==========
     const updates = [
-        { text: "20+ games now available on NexusPlay!", date: "April 17, 2026", type: "new" },
+        { text: "🔥 CYBERPUNK THEME LAUNCHED!", date: "April 19, 2026", type: "new" },
+        { text: "🔥 REAL GAME LOGOS ADDED!", date: "April 19, 2026", type: "new" },
+        { text: "16+ games now available on NexusPlay!", date: "April 19, 2026", type: "new" },
         { text: "GeForce NOW added to cloud services!", date: "April 17, 2026", type: "new" },
-        { text: "Xbox Cloud Gaming is now available!", date: "April 16, 2026", type: "new" },
-        { text: "Search and filter features added!", date: "April 16, 2026", type: "feature" },
-        { text: "Fortnite Chapter 5 Season 3 is live!", date: "April 15, 2026", type: "update" },
-        { text: "GTA 6 confirmed for 2025 release", date: "April 14, 2026", type: "news" }
+        { text: "Fortnite Chapter 5 Season 3 is live!", date: "April 15, 2026", type: "update" }
     ];
 
     let selectedAvatar = "😎";
     let favorites = JSON.parse(localStorage.getItem('nexusplay_favorites') || '[]');
     let showFavoritesOnly = false;
 
-    // ========== THEME FUNCTIONS ==========
     function toggleTheme() {
         if (document.body.classList.contains('dark')) {
             document.body.classList.remove('dark');
@@ -609,7 +580,6 @@
         }
     }
 
-    // ========== FAVORITE FUNCTIONS ==========
     function toggleFavorite(gameName) {
         if (favorites.includes(gameName)) {
             favorites = favorites.filter(f => f !== gameName);
@@ -629,7 +599,6 @@
         filterGames();
     }
 
-    // ========== FILTER FUNCTIONS ==========
     function filterGames() {
         const searchTerm = document.getElementById('searchBox').value.toLowerCase();
         const category = document.getElementById('categoryFilter').value;
@@ -651,7 +620,6 @@
         renderGames(filtered);
     }
 
-    // ========== RENDER FUNCTIONS ==========
     function renderCloudServices() {
         const container = document.getElementById('cloudGrid');
         if (!container) return;
@@ -676,8 +644,8 @@
             const isFavorite = favorites.includes(game.name);
             container.innerHTML += `
                 <div class="game-card">
-                    <button class="favorite-star" onclick="toggleFavorite('${game.name}')">${isFavorite ? '⭐' : '☆'}</button>
-                    <div class="game-icon">${game.icon}</div>
+                    <button class="favorite-star" onclick="toggleFavorite('${game.name.replace(/'/g, "\\'")}')">${isFavorite ? '⭐' : '☆'}</button>
+                    <img class="game-logo" src="${game.logo}" alt="${game.name} logo" onerror="this.src='https://via.placeholder.com/80?text=${game.name.charAt(0)}'">
                     <h3>${game.name}</h3>
                     <span class="game-category">${game.category}</span>
                     <a href="${game.url}" target="_blank" class="play-btn">Play Now →</a>
@@ -696,14 +664,14 @@
         container.innerHTML = '';
         updates.forEach(update => {
             let badgeClass = '';
-            if (update.type === 'new') badgeClass = 'badge-new';
-            else if (update.type === 'update') badgeClass = 'badge-update';
-            else if (update.type === 'feature') badgeClass = 'badge-new';
-            else badgeClass = 'badge-news';
+            let badgeText = '';
+            if (update.type === 'new') { badgeClass = 'badge-new'; badgeText = 'NEW'; }
+            else if (update.type === 'update') { badgeClass = 'badge-update'; badgeText = 'UPDATE'; }
+            else { badgeClass = 'badge-news'; badgeText = 'NEWS'; }
             
             container.innerHTML += `
                 <div class="update-item">
-                    <div class="update-badge ${badgeClass}">${update.type.toUpperCase()}</div>
+                    <div class="update-badge ${badgeClass}">${badgeText}</div>
                     <div class="update-text">${update.text}</div>
                     <div class="update-date">${update.date}</div>
                 </div>
@@ -711,7 +679,6 @@
         });
     }
 
-    // ========== AVATAR SELECTION ==========
     function setupAvatarSelection() {
         document.querySelectorAll('.avatar-choice').forEach(opt => {
             opt.addEventListener('click', function() {
@@ -723,7 +690,6 @@
         document.querySelector('.avatar-choice')?.classList.add('selected');
     }
 
-    // ========== AUTH FUNCTIONS ==========
     function signup() {
         const username = document.getElementById('signupUsername').value.trim();
         if (!username) {
@@ -791,7 +757,6 @@
         document.getElementById('loginBox').style.display = 'block';
     }
 
-    // ========== CHECK AUTO LOGIN ==========
     const savedUser = localStorage.getItem('nexusplay_current');
     if (savedUser) {
         const users = JSON.parse(localStorage.getItem('nexusplay_users') || '{}');
